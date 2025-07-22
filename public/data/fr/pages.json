@@ -1,0 +1,135 @@
+{
+    "kec": {
+        "titre": "Kit Eco Cooling",
+        "soustitre": "Optimiser les systèmes de refroidissement",
+        "description": "",
+        "articles": [
+            {
+                "titre": "Optimiser les systèmes de refroidissement",
+                "soustitre": "Chambres froides, climatiseurs professionnels",
+                "img": {
+                    "alt": "Kit Eco Cooling",
+                    "src": "/images/mur-clims.jpg"
+                },
+                "description": "<p>Une solution à moindre coût pour diminuer vos factures d'électricité et favoriser la chaîne du froid.</p><p>Kit Eco Cooling est un kit externe qui améliore les performances des systèmes de refroidissement.</p><p>En fonction de paramètres environnementaux, il injecte de l’eau sur les condenseurs pour permettre aux systèmes de retrouver leur efficacité et leur permettre de fonctionner lorsque les températures s’élèvent.</p>"
+            },
+            {
+                "titre": "Une innovation brevetée",
+                "soustitre": "Pour des gains de performance allant jusqu'à 70%.",
+                "img": {
+                    "alt": "Schéma simplifié de fonctionnement",
+                    "src": "/images/brevet.jpg"
+                },
+                "description": "<p>L'eau capte de l'énergie en s'évaporant. Comme le souffle sur la peau, cette énergie captée génère du froid. Le kit s'ajoute à vos matériels et brumise de l'eau améliorer les échanges thermiques des condenseurs de vos machines.</p><p>Les premiers tests laissent présager des gains allant jusqu'à 70%"
+            },
+            {
+                "titre": "Il va faire très chaud !",
+                "soustitre": "Amélioration du froid et économies sur les factures d'électricité.",
+                "img": {
+                    "alt": "Schéma simplifié de fonctionnement",
+                    "src": "/images/chaleur.jpg"
+                },
+                "description": "<p>L'eau capte de l'énergie en s'évaporant. Comme le souffle sur la peau, cette énergie captée génère du froid. Le kit s'ajoute à vos matériels et brumise de l'eau améliorer les échanges thermiques des condenseurs de vos machines.</p><p>Les premiers tests laissent présager des gains allant jusqu'à 70%"
+            }
+        ]
+    },
+    "qui": {
+        "titre": "Pour qui ?",
+        "soustitre": "Artisans, métiers de bouche médical",
+        "description": "",
+        "articles": [
+            {
+                "titre": "Artisans commerçants",
+                "soustitre": "Boulangers, bouchers, charcutiers, Kit Eco Cooling est fait pour vous !",
+                "img": {
+                    "alt": "Artisans commerçants & métiers de bouche",
+                    "src": "/images/boulanger.jpg"
+                },
+                "description": "<p>Nos solutions sont testées et développées avec le concours d'artisans commerçants. Le kit est calibré pour répondre à vos besoins et exigeances.</p><p>Il permet de diminuer vos factures d'électricité et de favoriser la chaîne du froid, en pariculier lors de fortes chaleurs.</p>"
+            },
+            {
+                "titre": "Restauration & demi-gros",
+                "soustitre": "Améliorez le rendemment de vos chambres froides",
+                "img": {
+                    "alt": "Retauration & demi-gros",
+                    "src": "/images/aliments.jpg"
+                },
+                "description": "<p>Le Kit Eco Cooling est particulièrement adapté pour les chambres froides dans la restauration et l'agroalimentaire.</p><p>Il fournit une solution pour diminuer les consommations électriques en améliorant leurs rendements.</p>"
+            },
+            {
+                "titre": "Cliniques, hôpitaux, laboratoires",
+                "soustitre": "Assurez le fonctionnement de systèmes tiers",
+                "img": {
+                    "alt": "Schéma simplifié de fonctionnement",
+                    "src": "/images/coeur.jpg"
+                },
+                "description": "<p>La préservation de la chaîne du froid est stratégique lors de fortes chaleurs ou de périodes de canicule. Les matériels sont mis à rude épreuve et la qualité du froid peut diminuer. En améliorant le fonctionnemnt des systèmes frigorifique, nous offrons une solutions pour participer à maintenir la chaine du froid.</p>"
+            }
+        ]
+    },
+    "produits": {
+        "titre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "soustitre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "description": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "articles": {}
+    },
+    "valeur": {
+        "titre": "Valeur ajoutée",
+        "soustitre": "",
+        "description": "",
+        "articles": {
+            "performance": {
+                "titre": "La performance des systèmes de refroidissement",
+                "soustitre": "Des plages de températures.",
+                "img": "./assets/img/schema.png",
+                "description": "<p>Les fluides frigorigènes fonctionnent sur des plages limitées. Les climatiseurs au soleil peuvent atteindre leurs limites dès 28°C. Il en résulte une baisse de performances, une surconsommation électrique et de la casse.</p><p>Kit Eco Cooling utilise les condensats pour les refroidir et améliorer les performances des systèmes de refroidissement même en milieu tempéré.</p>"
+            },
+            "energie": {
+                "titre": "Schéma simplifié de fonctionnement",
+                "soustitre": "Le kit s’ajoute sur des systèmes de refroidissement existants pour les étendre et en améliorer les performances. Une carte électronique contrôle l’ensemble des processus de mesures et de déclenchement.",
+                "img": "./assets/img/schema.png",
+                "description": "<ul><li><h3>1. Mouillage</h3><p>De l’eau est vaporisée sur le condenseur. En s’évaporant elle capte de l’énergie et le refroidit.</p></li><li><h3>2. Récupération de l'eau</h3><p>Les condensats sont récupérés et/ou une source externe adjointe.</p></li><li><h3>3. Alimentation</h3><p>Le kit se connecte sur la source d’alimentation du système de refroidissement.</p></li><li><h3>4. Capteurs</h3><p>Capteurs de vibration, chaleur, température permettent de contrôler l’environnement du système de refroidissement et de déclencher le mouillage.</p></li></ul>"
+            },
+            "protection": {
+                "titre": "Schéma simplifié de fonctionnement",
+                "soustitre": "Le kit s’ajoute sur des systèmes de refroidissement existants pour les étendre et en améliorer les performances. Une carte électronique contrôle l’ensemble des processus de mesures et de déclenchement.",
+                "img": "./assets/img/schema.png",
+                "description": "<ul><li><h3>1. Mouillage</h3><p>De l’eau est vaporisée sur le condenseur. En s’évaporant elle capte de l’énergie et le refroidit.</p></li><li><h3>2. Récupération de l'eau</h3><p>Les condensats sont récupérés et/ou une source externe adjointe.</p></li><li><h3>3. Alimentation</h3><p>Le kit se connecte sur la source d’alimentation du système de refroidissement.</p></li><li><h3>4. Capteurs</h3><p>Capteurs de vibration, chaleur, température permettent de contrôler l’environnement du système de refroidissement et de déclencher le mouillage.</p></li></ul>"
+            }
+        }
+    },
+    "contacts": {
+        "titre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "soustitre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "description": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "articles": []
+    },
+    "mentions": {
+        "titre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "soustitre": "Kit Eco Cooling - amélioration des performances des systèmes frigorifiques",
+        "description": "Conformément aux dispositions de l’article 6 III-1 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l’économie numérique, le présent site est la propriété de l'université de Bordeaux.\n\n## Directeur de la publication\nChristophe Beaulé\n\n## Informations légales\n### Directeur de la rédaction\nGérald Abbade\n\n## Éditeur\nKit Eco Cooling\n4B av. Philippe Le Bon\nLons\nTél. +33 (0)5 40 00 60 00\nCourriel : contact@kitecocooling.com\n\n### Gestion du site\nLarefi\nWebmestre : Anne Sophie Masure  \nCourriel : [anne-sophie.masure@u-bordeaux.fr](mailto://anne-sophie.masure@u-bordeaux.fr)  \nConception : [exlineo.com](https://www.exlineo.com)\n\n### Crédits photographiques\nUnsplash :\n- Mae Mu\n- Biljana Martinic\n- Adele Payman\n- Thomas Schaefer\n-  Patrick Weber\n- Ian\n\n### Technologies\nLinux, Apache, Angular, Strapi.\n\n### Hébergement\nSociété OVH \nSiège social : 2 rue Kellermann - 59100 Roubaix, France \n\n## Droit et propriété intellectuelle\nL'ensemble de ce site relève de la législation française et internationale sur la propriété intellectuelle. Les photographies, textes, dessins, images et autres protégés par les droits de propriété intellectuelle sont la propriété de l’Université de Bordeaux.\n\nLa reproduction sur support papier des pages de ce site est autorisée, sous réserve du respect des conditions suivantes :\n- gratuité de la diffusion\n- respect de l'intégrité des documents reproduits (ni modification ni altération d'aucune sorte)\n- citation explicite du site www.u-bordeaux.fr comme source et mention que les droits de reproductions sont réservés et limités\n- La reproduction sur support électronique de tout ou partie du site est autorisée sous réserve de l'ajout clair et lisible de la source (www.u-bordeaux.fr) et de la mention \"droits réservés\".\n\nCette autorisation ne s'applique pas à des sites diffusant des informations à caractère polémique, pornographique, xénophobe ou pouvant, dans une plus large mesure, porter atteinte à la sensibilité du plus grand nombre.\nToute utilisation à des fins publicitaires ou commerciale est exclue.\nLa violation de l'un de ces droits d’exploitation est un délit de contrefaçon passible de poursuite.\n\n## Liens hypertextes\nTout lien vers les sites de l’université de Bordeaux doit faire l'objet d'une demande préalable au webmestre.\n\nCe site peut permettre l'établissement de liens vers des sites existants ou hébergés par des tiers. L'existence de tels liens entre le site de l’université de Bordeaux et les sites tiers ne signifie pas que l’université de Bordeaux assume une quelconque garantie et responsabilité quant à son contenu ou à l'usage qui peut en être fait.\n\nIl incombe à l'utilisateur de prendre les précautions nécessaires pour s'assurer de l'absence de virus sur le site visité. L’université de Bordeaux décline toute responsabilité quant aux sites Internet qui possèdent un lien vers www.vincisudoe.eu.\n\n## Cookies\nL'utilisateur est informé que lors de ses visites sur le site, un cookie peut s'installer automatiquement et être conservé temporairement en mémoire ou sur son disque dur.\nUn cookie est un élément qui ne permet pas d'identifier l'utilisateur mais sert à enregistrer des informations relatives à la navigation de celui-ci sur le site internet.\nL’utilisateur du site reconnaît avoir été informé de cette pratique et autorise l’université de Bordeaux à l'employer. Ils pourront désactiver ce cookie par l'intermédiaire des paramètres figurant au sein de leur logiciel de navigation.\n\n## Conditions générales d'utilisation du site\nL’utilisateur reconnaît avoir pris connaissance des présentes conditions d’utilisation et s’engage à les respecter. Cependant, ces mentions ne sont pas exhaustives et les droits que l’université de Bordeaux pourrait détenir ne sont pas limités par les présentes dispositions.\n\nLe contenu du site est fourni \" en l'état \", sans aucune garantie de quelque nature que ce soit. L’université de Bordeaux ne garantit, et ne saurait supporter la moindre responsabilité quant à l'usage qui pourrait être fait de ce site.\n\nEn aucun cas, l’université de Bordeaux ne pourra être tenue responsable des dommages de toute nature, directs ou indirects qui résulteraient de l'utilisation de ce site et notamment des dommages matériels, perte de données ou de programme, résultant de l'accès ou de l'utilisation de ce site ou de tous sites qui lui sont liés.\n\nL’université de Bordeaux ne peut garantir que les informations du site sont complètes, précises, exactes, dépourvues de toute erreur et à jour. Toute information pourra être modifiée par l’université de Bordeaux sans avertissement préalable. L’université de Bordeaux s'efforce de mettre à la disposition des utilisateurs du site, des informations fiables et mises à jour. Toutefois, en dépit de notre vigilance, d'éventuelles erreurs ou omissions peuvent être constatées.\n\nLes informations fournies par l’université de Bordeaux le sont à titre indicatif et ne sauraient dispenser l’utilisateur d’une analyse complémentaire et personnalisée. L’université de Bordeaux ne saurait garantir l’exactitude, la complétude, l’actualité des informations diffusées sur son site. En conséquence, l’utilisateur reconnaît utiliser ces informations sous sa responsabilité exclusive.\n\nL’utilisateur du site et des sites s’y rattachant reconnaît avoir vérifié que la configuration informatique utilisée ne contient aucun virus et qu’elle est en parfait état de fonctionnement.\n\n## Mentions relatives à la protection des données personnelles\nLa loi du 6 août 2004 relative à la protection des personnes physiques à l'égard des traitements de données à caractère personnel et modifiant la loi du 6 janvier 1978 relative à l'informatique réglemente l'usage des données nominatives afin de limiter les risques d'utilisation qui seraient contraires aux libertés. En vertu des obligations légales, aucune information personnelle ne sera collectée, ni cédée à des tiers à l’insu de l’utilisateur. De plus, aucune information personnelle n'est utilisée à des fins non prévues par l’utilisateur du site.\n\nL'utilisateur est notamment informé, conformément à l'article 32 de la loi du 6 août 2004, de l'identité du responsable du traitement, de la finalité du traitement, du caractère obligatoire ou facultatif des réponses, des conséquences du défaut de réponse, du destinataire des informations.\n\nConformément à la Loi \" Informatique et Libertés \"n°78-17 du 6 janvier 1978, l’utilisateur dispose d'un droit d'accès, de rectification et de suppression des données nominatives le concernant. L’utilisateur peut l'exercer en s’adressant au webmestre.\n\nL'utilisateur trouvera des informations sur ses droits et ses devoirs et sur la protection des données individuelles sur le site de la Commission nationale informatique et libertés.\n \nL’utilisateur du site et des sites s’y rattachant est tenu de respecter les dispositions de la loi relative à l’informatique, aux fichiers et aux libertés, dont la violation est passible de sanctions pénales. Il doit notamment s’abstenir, s’agissant des informations nominatives auxquelles il accède, de toute collecte, de toute utilisation détournée et, d’une manière générale, de tout acte susceptible de porter atteinte à la vie privée ou la réputation des personnes.\n\nLes données saisies dans les formulaires de contact sont utilisées dans le seul but d’apporter une réponse, mais ne sont ni stockées, cédées ou transmises à des tiers.",
+        "articles": [
+            {
+                "titre":"",
+                "soustitre":"",
+                "description":""
+            }
+        ]
+    },
+    "schema": {
+        "titre": "Schéma simplifié de fonctionnement",
+        "soustitre": "Le kit s’ajoute sur des systèmes de refroidissement existants pour les étendre et en améliorer les performances. Une carte électronique contrôle l’ensemble des processus de mesures et de déclenchement.",
+        "img": {
+            "alt": "Schéma simplifié de fonctionnement",
+            "src": "/images/schema.jpg"
+        },
+        "description": "<ul><li><h3>1. Mouillage</h3><p>De l’eau est vaporisée sur le condenseur. En s’évaporant elle capte de l’énergie et le refroidit.</p></li><li><h3>2. Récupération de l'eau</h3><p>Les condensats sont récupérés et/ou une source externe adjointe.</p></li><li><h3>3. Alimentation</h3><p>Le kit se connecte sur la source d’alimentation du système de refroidissement.</p></li><li><h3>4. Capteurs</h3><p>Capteurs de vibration, chaleur, température permettent de contrôler l’environnement du système de refroidissement et de déclencher le mouillage.</p></li></ul>",
+        "articles": [
+            {
+                "titre":"",
+                "soustitre":"",
+                "description":"<ul><li>Brevet déposé auprès de l’INPI : </li><li>DISPOSITIF DE REFROIDISSEMENT POUR UN SYSTÉME FRIGORIFIQUE ET SYSTÉME FRIGORIFIQUE ASSOCIÉ</li><li>Numéro d’enregistrement FR2409052</li><li>Date de dépôt : 22 août 2024</li></ul>"
+            }
+        ]
+    }
+}

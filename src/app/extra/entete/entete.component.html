@@ -1,0 +1,17 @@
+<a class="logo" routerLink="/">
+    <img src="/images/KEC_pingouin.png" alt="logo">
+    <div>
+        <p>Kit</p>
+        <p>Eco</p>
+        <p>Cooling</p>
+    </div>
+</a>
+<nav>
+    <ul>
+        @if(auth.con){
+        <li>
+            <a routerLink="/profil">Mon profil</a>
+        </li>
+        }
+    </ul>
+</nav>

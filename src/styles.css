@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --bleu: #42207e;
+    --gris: #d7d7d7;
+    --rose: rgb(190, 50, 108);
+    --jaune: #D6B200;
+    --vert: #b3d144;
+    --clair: #FFF;
+    --sombre: #111631;
+    --logo: 200px;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans", sans-serif;
+    font-size: var(--size);
+    background-color: var(--clair);
+    color: var(--sombre);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: rgb(190, 50, 108);
+    background: linear-gradient(90deg, rgb(190, 50, 108) 0%, rgb(66, 32, 126) 100%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: 300;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+a:hover {
+    font-weight: 600;
+}
+
+a:after {
+    border-bottom: 1px solid var(--clair);
+    /* width:0; */
+}
+
+a:hover:after {
+    width: 100%;
+}
+
+main,
+section,
+article,
+nav,
+footer,
+form,
+fieldset, div {
+    display: flex;
+}
+
+article {
+    flex-flow: column nowrap;
+    padding: 20px;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: var(--clair);
+    bottom: -5px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease-out;
+}
+
+a:hover::after {
+    transform: scaleX(1);
+}
+
+button {
+    width: fit-content;
+    padding: 20px 25px;
+    border: none;
+    background-color: var(--bleu);
+    color: var(--clair);
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--rose);
+    box-shadow: 0 2px 2px var(--bleu);
+}
+
+figure {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+app-root {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+app-root main {
+    margin: 0 auto;
+    width: 100vw;
+    padding: 0;
+}
+
+app-menu {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+app-menu nav {
+    font-size: 18px;
+    margin-right: 20px;
+    width: calc(100vw - var(--logo));
+    align-items: center;
+}
+
+app-pied nav {
+    font-size: 14px;
+    margin-right: 20px;
+    width: 100vw;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+app-menu nav ul,
+app-pied nav ul {
+    display: flex;
+    flex-flow: row nowrap;
+    list-style: none;
+}
+
+app-pied nav ul {
+    margin: 10px auto;
+}
+
+app-menu li,
+app-pied li {
+    margin: 10px;
+}
+
+app-menu li a,
+app-pied li a {
+    margin: 5px 10px;
+    color: var(--clair);
+}
+
+form,
+fieldset {
+    flex-flow: column nowrap;
+    border: none;
+}
+
+label {
+    font-weight: 200;
+    font-variant: italic;
+}
+
+input,
+textarea {
+    padding: 10px;
+    margin: 10px 20px;
+    border: none;
+    background-color: var(--gris);
+    color: var(--sombre);
+    font-size: 16px;
+    font-family: "Noto Sans", sans-serif;
+}
+
+h1 {
+    font-weight: 100;
+    color: var(--clair);
+    font-size: 32px;
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 24px;
+}
+
+main>*>h2 {
+    color: var(--clair);
+}
+
+section {
+    width: 100vw;
+    min-height: 400px;
+    padding: 20px;
+    flex-flow: column nowrap;
+}
+
+section>h1 {
+    font-weight: 900;
+}
+
+section>h2 {
+    font-weight: 300;
+}
+
+section>button {
+    margin: 20px auto;
+}
+
+.logo {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 20px;
+    width: var(--logo);
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 5px;
+}
+
+.logo div {
+    font-size: 16px;
+    color: var(--clair);
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.logo div p {
+    margin: 0;
+}
+
+.logo div p:nth-child(1) {
+    font-weight: 100;
+}
+
+.logo div p:nth-child(2) {
+    font-weight: 300;
+}
+
+.logo div p:nth-child(3) {
+    font-weight: 600;
+}
+
+.slide {
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+    display: flex;
+    align-items: stretch;
+    margin: 30px 0 30px -50px;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: var(--clair);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.slide article {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.slide article:nth-child(1) {
+    width: 40%;
+    margin-right: 30px;
+}
+
+.slide article:nth-child(2) {
+    width: 60%;
+}
+
+.anti {
+    margin: 30px 0 30px 80px;
+}
+
+.anti article:nth-child(1) {
+    width: 60%;
+}
+
+.anti article:nth-child(2) {
+    width: 40%;
+}
+
+section.centre {
+    text-align: center;
+}
+
+section.centre>* {
+    justify-content: center;
+}
+
+.horizon {
+    flex-flow: row nowrap;
+}
+
+.horizon>* {
+    /* flex:1; */
+}
+
+.horizon h3 {
+    font-size: 32px;
+    font-weight: 100;
+}
+
+section.horizon>* {
+    width: 50%;
+    height: 100%;
+}
+
+section.horizon>figure {
+    min-height: 500px;
+    margin: -20px 20px -20px -20px;
+}
+
+.titre {
+    text-align: center;
+    color: var(--clair);
+    justify-content: space-around;
+    height: 500px;
+}
+
+.bg-bleu {
+    background-color: var(--bleu);
+}
+
+.bleu {
+    color: var(--bleu);
+}
+
+.bg-sombre {
+    background-color: var(--sombre);
+    color: var(--clair);
+}
+
+.bg-rose {
+    background-color: var(--rose);
+    color: var(--clair);
+}
+
+section.bg-sombre {
+    /* border-top:2px solid var(--rose);
+    border-bottom:2px solid var(--rose); */
+}
+
+.entete {
+    font-size: small;
+    font-weight: 200;
+    text-align: right;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+}
+
+.entete>* {
+    margin: 0 5px;
+}
+
+.sombre {
+    color: var(--sombre);
+}
+
+.cartel {
+    flex-flow: column nowrap;
+    background-color: var(--sombre);
+    color: var(--clair);
+    margin: 20px;
+}
+
+.cartel figure {
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cartel article {
+    width: 50%;
+    padding: 10px;
+}
+
+.icones {
+    flex-flow: column nowrap;
+    text-align: center;
+}
+
+.icones>* {
+    margin: 10px;
+    flex: 0 1;
+}
+
+.icones>figure,
+.icones>figure>img {
+    width: 75px;
+    height: 75px;
+    margin: 10px auto;
+}
+
+.icones>article {
+    margin: 0 30px;
+}
+
+.icones>article>div {
+    font-weight: 200;
+}
+
+span.separation {
+    margin: auto 0px;
+    width: 1px;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.3);
+    flex: none;
+}
+
+/* .icones > figure > img {
+    width:75px;
+    height:75px;
+    margin:10px auto;
+} */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(87, 6, 40);
+    background: linear-gradient(180deg, rgb(66, 32, 126) 0%, rgb(190, 50, 108) 100%);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--sombre);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bleu);
+}
