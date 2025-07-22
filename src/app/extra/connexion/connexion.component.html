@@ -1,14 +1,24 @@
 <section>
-    <h1>Connexion</h1>
-    <blockquote>Connexion</blockquote>
-    <form>
-        <fieldset>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-            <button type="reset">Annuler</button>
-            <button type="submit">Connexion</button>
-        </fieldset>
-    </form>
+    @if(!auth.user){
+        
+    <article class="cartel">
+        <h1>Connexion</h1>
+        than
+        <!-- <blockquote>Connexion</blockquote> -->
+        <form (submit)="auth.getAuth(id.email, id.mdp)" #m="ngForm">
+            <fieldset>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required [(ngModel)]="id.email">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required [(ngModel)]="id.mdp">
+            </fieldset>
+            <fieldset class="ligne">
+                <button type="reset">Annuler</button>
+                <button type="submit">Connexion</button>
+            </fieldset>
+        </form>
+    </article>
+    }@else {
+            <button routerLink="/intra" class="ligne"><span>Accéder au dashboard</span><span class="material-icons">keyboard_arrow_right</span></button>
+    }
 </section>

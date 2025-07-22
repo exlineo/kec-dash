@@ -1,0 +1,71 @@
+:root {
+    --bleu: #42207e;
+    --gris: #d7d7d7;
+    --rose: rgb(190, 50, 108);
+    --jaune: #D6B200;
+    --vert: #b3d144;
+    --clair: #FFF;
+    --sombre: #111631;
+    --logo: 200px;
+}
+
+:host{
+    width:100vw;
+    height:calc(100vh - 100px);
+    display:flex;
+    flex-flow: row nowrap;
+}
+:host > aside{
+    width:100px;
+}
+:host > section{
+    width:calc(100vw - 100px);
+    padding:0px 50px;
+}
+
+:host > aside {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+:host > aside nav {
+    font-size: 18px;
+    width: 100%;
+    align-items: center;
+}
+
+:host > aside nav ul {
+    display: flex;
+    flex-flow: column nowrap;
+    list-style: none;
+    color:var(--clair);
+    padding:0;
+}
+:host > aside a {
+    color: var(--clair);
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    padding:10px 5px;
+}
+:host > aside a:hover {
+    color: var(--bleu);
+    background-color: var(--clair);
+    transform: scale(1.05);
+}
+:host > aside nav ul {
+    margin: 10px 0;
+    list-style: none;
+}
+:host > aside li {
+    margin: 10px;
+}
+.profil{
+    position:absolute;
+    right:20px;
+    top:10px;
+    font-size: 32px;
+    color:var(--clair);
+    cursor: pointer;
+}

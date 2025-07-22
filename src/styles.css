@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* You can add global styles to this file, and also import other style files */
 :root {
     --bleu: #42207e;
     --gris: #d7d7d7;
@@ -87,6 +86,7 @@ a:hover::after {
 }
 
 button {
+    display: flex;
     width: fit-content;
     padding: 20px 25px;
     border: none;
@@ -121,18 +121,13 @@ app-root main {
     width: 100vw;
     padding: 0;
 }
+app-connexion section {
 
-app-menu {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
 }
-
-app-menu nav {
-    font-size: 18px;
-    margin-right: 20px;
-    width: calc(100vw - var(--logo));
-    align-items: center;
+app-connexion article {
+    margin: auto !important;
+    width: 400px;
+    padding: 30px;
 }
 
 app-pied nav {
@@ -144,7 +139,6 @@ app-pied nav {
     justify-content: space-between;
 }
 
-app-menu nav ul,
 app-pied nav ul {
     display: flex;
     flex-flow: row nowrap;
@@ -155,12 +149,10 @@ app-pied nav ul {
     margin: 10px auto;
 }
 
-app-menu li,
 app-pied li {
     margin: 10px;
 }
 
-app-menu li a,
 app-pied li a {
     margin: 5px 10px;
     color: var(--clair);
@@ -192,6 +184,8 @@ h1 {
     font-weight: 100;
     color: var(--clair);
     font-size: 32px;
+    width:100%;
+    text-align: center;
 }
 
 h2 {
@@ -228,6 +222,7 @@ section>button {
     align-items: center;
     margin: 20px;
     width: var(--logo);
+    position: absolute;
 }
 
 .logo img {
@@ -335,7 +330,11 @@ section.horizon>figure {
     min-height: 500px;
     margin: -20px 20px -20px -20px;
 }
-
+.ligne {
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
 .titre {
     text-align: center;
     color: var(--clair);
@@ -443,7 +442,30 @@ span.separation {
 ::-webkit-scrollbar {
     width: 6px;
 }
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 32px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  margin:5px;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
 
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
 /* Track */
 ::-webkit-scrollbar-track {
     background: rgb(87, 6, 40);

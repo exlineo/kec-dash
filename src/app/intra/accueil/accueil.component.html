@@ -1,1 +1,25 @@
-<p>accueil works!</p>
+<a routerLink="/intra/profil" class="profil"><span class="material-icons">person</span></a>
+<aside>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink="/intra">
+                    <span class="material-icons">home</span>
+                    Accueil</a>
+            </li>
+            <li>
+                <a routerLink="/intra/reglages">
+                    <span class="material-icons">display_settings</span>
+                    Réglages</a>
+            </li>
+            <li>
+                <a routerLink="/intra/kits">
+                    <span class="material-icons">memory</span>
+                    Kits</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+<section>
+    <router-outlet></router-outlet>
+</section>
