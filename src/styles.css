@@ -59,7 +59,8 @@ article,
 nav,
 footer,
 form,
-fieldset, div {
+fieldset,
+div {
     display: flex;
 }
 
@@ -121,9 +122,9 @@ app-root main {
     width: 100vw;
     padding: 0;
 }
-app-connexion section {
 
-}
+app-connexion section {}
+
 app-connexion article {
     margin: auto !important;
     width: 400px;
@@ -158,6 +159,15 @@ app-pied li a {
     color: var(--clair);
 }
 
+app-root>main>router-outlet+* {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    height: 100%;
+}
+form {
+    padding:0 20px;
+}
 form,
 fieldset {
     flex-flow: column nowrap;
@@ -170,11 +180,12 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
     padding: 10px;
     margin: 10px 20px;
     border: none;
-    background-color: var(--gris);
+    background-color: var(--clair);
     color: var(--sombre);
     font-size: 16px;
     font-family: "Noto Sans", sans-serif;
@@ -184,7 +195,7 @@ h1 {
     font-weight: 100;
     color: var(--clair);
     font-size: 32px;
-    width:100%;
+    width: 100%;
     text-align: center;
 }
 
@@ -198,7 +209,7 @@ main>*>h2 {
 }
 
 section {
-    width: 100vw;
+    width: 100%;
     min-height: 400px;
     padding: 20px;
     flex-flow: column nowrap;
@@ -215,7 +226,20 @@ section>h2 {
 section>button {
     margin: 20px auto;
 }
-
+table {
+    width: 100%;
+    color:var(--clair);
+}
+table tr{
+    background-color: var(--sombre);
+}
+table th, table td {
+    padding: 10px;
+    text-align: center;
+}
+table th {
+    border-bottom: 5px solid rgba(0,0,0,0);
+}
 .logo {
     display: flex;
     flex-flow: row nowrap;
@@ -288,16 +312,13 @@ section>button {
     width: 60%;
 }
 
-.anti {
-    margin: 30px 0 30px 80px;
+.charts article {
+    background-color: var(--clair);
+    margin: 10px 0;
 }
 
-.anti article:nth-child(1) {
-    width: 60%;
-}
-
-.anti article:nth-child(2) {
-    width: 40%;
+.charts canvas {
+    width: 100%;
 }
 
 section.centre {
@@ -309,7 +330,7 @@ section.centre>* {
 }
 
 .horizon {
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
 }
 
 .horizon>* {
@@ -330,11 +351,13 @@ section.horizon>figure {
     min-height: 500px;
     margin: -20px 20px -20px -20px;
 }
+
 .ligne {
     flex-flow: row nowrap;
     justify-content: space-around;
     align-items: center;
 }
+
 .titre {
     text-align: center;
     color: var(--clair);
@@ -425,7 +448,10 @@ section.bg-sombre {
 .icones>article>div {
     font-weight: 200;
 }
-
+.position-droite{
+    position:absolute;
+    right:20px;
+}
 span.separation {
     margin: auto 0px;
     width: 1px;
@@ -442,30 +468,34 @@ span.separation {
 ::-webkit-scrollbar {
     width: 6px;
 }
+
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 32px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  margin:5px;
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 32px;
+    color:var(--clair);
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    margin: 5px;
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
 
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
 
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+    /* Support for IE. */
+    font-feature-settings: 'liga';
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: rgb(87, 6, 40);

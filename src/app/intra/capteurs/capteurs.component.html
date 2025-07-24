@@ -1,0 +1,30 @@
+<h1>Données des kits</h1>
+<header class="bg-sombre">
+    <form class="ligne" (submit)="getCapteursData()">
+        <fieldset>
+            <label>Sélectionner un kit</label>
+            <select name="kit" [(ngModel)]="filtres.kit">
+                <option value="">Tous</option>
+                <option value="0001">Kit 1</option>
+            </select>
+        </fieldset>
+        <fieldset>
+            <label>Date de début</label>
+            <input type="datetime-local" name="debut" [(ngModel)]="filtres.debut" min="2025-07-14T00:00">
+        </fieldset>
+        <fieldset>
+            <label>Date de fin</label>
+            <input type="datetime-local" name="fin" [(ngModel)]="filtres.fin" min="2025-07-14T00:00">
+        </fieldset>
+        <fieldset class="ligne">
+            <button type="reset">Annuler</button>
+            <button type="submit">Rechercher</button>
+        </fieldset>
+    </form>
+
+</header>
+<section class="charts">
+    <article>
+        <canvas id="chartLignes">{{ lineChart }}</canvas>
+    </article>
+</section>

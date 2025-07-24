@@ -1,15 +1,76 @@
-<h1>Gérer les kits</h1>
+
+<h1>Gérer les kits @if(!edit){
+    <a (click)="edit = true" class="position-droite"><span class="material-icons">add</span></a>
+    }</h1>
+<header class="bg-sombre">
+    @if(edit) {
+    <form>
+        <h2>Créer un kit</h2>
+        <article class="horizon">
+        <fieldset>
+            <label>Identifiant</label>
+            <input name="id" [(ngModel)]="kit.id" required>
+        </fieldset>
+        <fieldset>
+            <label>Client</label>
+            <select name="client" [(ngModel)]="kit.client"></select>
+        </fieldset>
+        <fieldset>
+            <label>Adresse</label>
+            <input name="adresse" [(ngModel)]="kit.adresse">
+        </fieldset>
+        <fieldset>
+            <label>Code postal</label>
+            <input name="codepostal" type="number" [(ngModel)]="kit.codePostal">
+        </fieldset>
+        <fieldset>
+            <label>Ville</label>
+            <input name="ville" [(ngModel)]="kit.ville">
+        </fieldset>
+        <fieldset>
+            <label>Latitude</label>
+            <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
+        </fieldset>
+        <fieldset>
+            <label>Longitude</label>
+            <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
+        </fieldset>
+        <fieldset class="ligne">
+            <button type="reset" (click)="edit = false">Annuler</button>
+            <button type="submit">Créer</button>
+        </fieldset>
+        </article>
+    </form>
+
+    }
+</header>
 <section>
-    <article>
-        <h2>Kit 1</h2>
-        <p>description du kit 1</p>
-    </article>
-    <article>
-        <h2>Kit 2</h2>
-        <p>description du kit 2</p>
-    </article>
-    <article>
-        <h2>Kit 3</h2>
-        <p>description du kit 3</p>
-    </article>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>client</th>
+                <th>adresse</th>
+                <th>ville</th>
+                <th>Code postal</th>
+                <th>Date de mise en service</th>
+                <th>Géolocalisation</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @for(kit of c.kits; track kit.id){
+    <tr>
+        <td>{{ kit.id }}</td>
+        <td>{{ kit.client }}</td>
+        <td>{{ kit.adresse }}</td>
+        <td>{{ kit.ville }}</td>
+        <td>{{ kit.codePostal }}</td>
+        <td>{{ kit.creation | toDate }}</td>
+        <td>@if(kit.geo && kit.geo.lat && kit.geo.lon){<a href="http://www.openstreetmap.org/#map=16/{{ kit.geo.lat }}/{{ kit.geo.lon }}" target="_blank"><span class="material-icons">map</span></a>}</td>
+        <td></td>
+    </tr>
+    }
+    </tbody>
+    </table>
 </section>

@@ -21,6 +21,7 @@
 :host > section{
     width:calc(100vw - 100px);
     padding:0px 50px;
+    overflow-y: auto;
 }
 
 :host > aside {
