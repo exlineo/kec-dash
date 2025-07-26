@@ -405,23 +405,51 @@ section.bg-sombre {
 }
 
 .cartel {
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+}
+.cartel h1, .cartel h2 {
+    width:10%;
+    clear: both;
+}
+.cartel article {
     background-color: var(--sombre);
     color: var(--clair);
     margin: 20px;
+    flex-flow: column nowrap;
+    flex:1;
+    height: max-content;
 }
-
-.cartel figure {
-    width: 50%;
-    height: 100%;
+.cartel h3 {
+    text-align:center;
+    font-weight: 200;
+    margin-top:5px;
+    margin-bottom:25px;
+}
+.cartel article > div {
+    display:flex;
+    justify-content: space-around;
+    width:100%;
+    flex-flow: row nowrap;
+}
+.cartel article > div > div {
+    display:flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    padding:0 10px;
+}
+.cartel article > div > div > * {
+    margin:5px auto;
+}
+.cartel article > div > div p {
+    font-size: 12px;
+    font-weight: 100;
+}
+.cartel article figure {
+    width: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-.cartel article {
-    width: 50%;
-    padding: 10px;
 }
 
 .icones {

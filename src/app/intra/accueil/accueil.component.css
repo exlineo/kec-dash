@@ -51,9 +51,15 @@
     padding:10px 5px;
 }
 :host > aside a:hover {
+    color: var(--sombre);
+}
+:host > aside a:hover {
     color: var(--bleu);
     background-color: var(--clair);
     transform: scale(1.05);
+}
+:host > aside a:hover span {
+    color: var(--bleu);
 }
 :host > aside nav ul {
     margin: 10px 0;

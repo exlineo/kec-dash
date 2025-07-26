@@ -1,20 +1,25 @@
-import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { CapteursService } from '../services/capteurs.service';
 import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
-import { TimePipe } from '../services/filtres.pipe';
+import { DureePipe, TimePipe } from '../services/filtres.pipe';
+import { UtilsService } from '../../extra/services/utils.service';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-capteurs',
-  imports: [FormsModule],
+  imports: [ FormsModule, DureePipe ],
   templateUrl: './capteurs.component.html',
   styleUrl: './capteurs.component.css'
 })
 export class CapteursComponent implements OnInit {
 
   c: CapteursService = inject(CapteursService);
+  u: UtilsService = inject(UtilsService);
+
+  dp:DureePipe = new DureePipe();
+  tp:TimePipe = new TimePipe();
 
   lineChart: any = null;
   lineData: any = null;
@@ -26,9 +31,11 @@ export class CapteursComponent implements OnInit {
     time_debut: 0,
     time_fin: Date.now()
   };
+  foncts: Array<Array<number>> = []; // Tableau des temps de fonctionnement
+  durees:{arret:number, fonctionnement:number} = {arret:0, fonctionnement:0};
   constructor() {
     effect(() => {
-      this.setChart();
+      this.setStats();
     })
   }
   ngOnInit() {
@@ -36,9 +43,9 @@ export class CapteursComponent implements OnInit {
 
   getCapteursData() {
     // console.log(this.filtres);
-    this.filtres.time_debut = new TimePipe().transform(this.filtres.debut);
-    this.filtres.time_fin = new TimePipe().transform(this.filtres.fin);
-
+    this.filtres.time_debut = this.tp.transform(this.filtres.debut);
+    this.filtres.time_fin = this.tp.transform(this.filtres.fin);
+    console.log(this.filtres);
     this.c.getCapteurByTemps(this.filtres.time_debut, this.filtres.time_fin);
   }
   setChartConfig(data: any) {
@@ -59,7 +66,8 @@ export class CapteursComponent implements OnInit {
       pointHoverRadius: 10
     }
   }
-  setChart() {
+  /** Traiter les données reçus */
+  setStats() {
     const ta: any = []; // Temperature ambiante
     const ha: any = []; // Humidité ambiante
     const tm: any = []; // Temperature machine
@@ -67,8 +75,26 @@ export class CapteursComponent implements OnInit {
     const cm: any = []; // Courant
     const h2o: any = [];
     const etiquettes: any = [];
+    this.durees = {arret:0, fonctionnement:0};
 
-    this.c.capteurs().forEach((c) => {
+    // Calculer les temps
+    const times = this.c.capteurs().map((c: any) => c.timestamp);
+    times.forEach((t: any, index: number) => {
+      let tmp = 0;
+      if(index > 0 ){
+      }
+      if (index > 0 && (t - times[index - 1] > 30000 || t == 0)) {
+        console.log(t - times[index - 1]);
+        this.foncts.push(times.splice(tmp, index - 1));
+        this.durees.fonctionnement += t - times[tmp];
+        tmp = index;
+      }
+    });
+    // Calcul du temps sans fonctionnement
+    this.durees.arret = this.filtres.time_fin - this.filtres.time_debut - this.durees.fonctionnement;
+    // Afficher les courbes des capteurs
+    this.c.capteurs().forEach((c: any, index: number) => {
+      // Données pour le chart
       ta.push(c.t_ambiante);
       ha.push(c.h_ambiante * 100);
       tm.push(c.t_machine);
@@ -90,6 +116,7 @@ export class CapteursComponent implements OnInit {
       ]
     };
 
+    console.log(this.foncts, this.durees, this.dp.transform(this.durees.fonctionnement));
     // console.log(ta, ha, tm, vm, cm, h2o, this.lineData);
     if (this.lineChart) {
       this.lineChart.destroy();
