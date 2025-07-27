@@ -9,7 +9,7 @@ Chart.register(...registerables);
 
 @Component({
   selector: 'app-capteurs',
-  imports: [ FormsModule, DureePipe ],
+  imports: [FormsModule, DureePipe],
   templateUrl: './capteurs.component.html',
   styleUrl: './capteurs.component.css'
 })
@@ -18,8 +18,8 @@ export class CapteursComponent implements OnInit {
   c: CapteursService = inject(CapteursService);
   u: UtilsService = inject(UtilsService);
 
-  dp:DureePipe = new DureePipe();
-  tp:TimePipe = new TimePipe();
+  dp: DureePipe = new DureePipe();
+  tp: TimePipe = new TimePipe();
 
   lineChart: any = null;
   lineData: any = null;
@@ -32,7 +32,7 @@ export class CapteursComponent implements OnInit {
     time_fin: Date.now()
   };
   foncts: Array<Array<number>> = []; // Tableau des temps de fonctionnement
-  durees:{arret:number, fonctionnement:number} = {arret:0, fonctionnement:0};
+  durees: { arret: number, fonctionnement: number } = { arret: 0, fonctionnement: 0 };
   constructor() {
     effect(() => {
       this.setStats();
@@ -75,22 +75,27 @@ export class CapteursComponent implements OnInit {
     const cm: any = []; // Courant
     const h2o: any = [];
     const etiquettes: any = [];
-    this.durees = {arret:0, fonctionnement:0};
+    this.durees = { arret: 0, fonctionnement: 0 };
 
-    // Calculer les temps
+    // Récupérer l'ensemble des timestamps
     const times = this.c.capteurs().map((c: any) => c.timestamp);
-    times.forEach((t: any, index: number) => {
-      let tmp = 0;
-      if(index > 0 ){
-      }
-      if (index > 0 && (t - times[index - 1] > 30000 || t == 0)) {
-        console.log(t - times[index - 1]);
-        this.foncts.push(times.splice(tmp, index - 1));
-        this.durees.fonctionnement += t - times[tmp];
-        tmp = index;
-      }
-    });
+    // console.log("Ecarts trouvés", this.sommeEcarts(times));
+    // Calculer le temps de fonctionnement
+    // times.forEach((t: any, index: number) => {
+    //   let tmp = 0;
+    //   if (index > 0 && (t - times[index - 1] > 30000 || t == 0)) {
+    //     this.foncts.push(times.splice(tmp, index - 1));
+    //     tmp = index;
+    //   };
+    // });
+    // // Calculer le temps de fonctionnement de la machine
+    // this.foncts.forEach((f: any) => {
+    //   if (f.length > 0) {
+    //     this.durees.fonctionnement += f[f.length - 1] - f[0]
+    //   }
+    // });
     // Calcul du temps sans fonctionnement
+    this.durees.fonctionnement = times[times.length - 1] - times[0] - this.sommeEcarts(times);
     this.durees.arret = this.filtres.time_fin - this.filtres.time_debut - this.durees.fonctionnement;
     // Afficher les courbes des capteurs
     this.c.capteurs().forEach((c: any, index: number) => {
@@ -123,4 +128,34 @@ export class CapteursComponent implements OnInit {
     }
     this.lineChart = new Chart('chartLignes', this.setChartConfig(this.lineData));
   }
+  trouverGrandsEcarts(timestamps: Array<number>) {
+    const ecarts = [];
+
+    for (let i = 1; i < timestamps.length; i++) {
+      const ecart = (timestamps[i] - timestamps[i - 1]) / 1000; // Convertir en secondes
+      if (ecart > 60) {
+        ecarts.push({
+          indexDebut: i - 1,
+          indexFin: i,
+          timestampDebut: timestamps[i - 1],
+          timestampFin: timestamps[i],
+          ecartSecondes: ecart
+        });
+      }
+    }
+
+    return ecarts;
+  }
+  sommeEcarts(timestamps:Array<number>) {
+    let sommeEcartsMs = 0;
+    
+    for (let i = 1; i < timestamps.length; i++) {
+        const ecartMs = timestamps[i] - timestamps[i-1];
+        if (ecartMs > 15000) { // 30 000 ms = 30 secondes
+            sommeEcartsMs += ecartMs;
+        }
+    }
+    
+    return sommeEcartsMs;
+}
 }

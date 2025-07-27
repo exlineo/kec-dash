@@ -35,18 +35,18 @@
         <div>
             <div>
                 <span class="material-icons">directions_run</span>
+                <p>La machine a fonctionné</p>
                 <h4>{{ durees.fonctionnement | duree }}</h4>
-                <p>Fonctionnement</p>
             </div>
             <div>
                 <span class="material-icons">directions_walk</span>
+                <p>La machine était arretée</p>
                 <h4>{{ durees.arret | duree }}</h4>
-                <p>Arrêt</p>
             </div>
             <div>
                 <span class="material-icons">run_circle</span>
+                <p>Temps global pris en compte</p>
                 <h4>{{ filtres.time_debut | duree:filtres.time_fin }}</h4>
-                <p>Globale</p>
             </div>
         </div>
     </article>

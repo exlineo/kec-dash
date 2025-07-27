@@ -26,7 +26,7 @@ export class ToDatePipe implements PipeTransform {
 export class DureePipe implements PipeTransform {
 
   transform(debut: number, fin?: number): string {
-    if(!debut) return '0:0:0';
+    if(!debut || debut === 0) return '0h 0mn 0s';
     // Convertir le timestamp en secondes
     const totalSeconds = fin && fin > debut ? Math.floor((fin - debut) / 1000) : Math.floor(debut / 1000);
     
@@ -41,7 +41,7 @@ export class DureePipe implements PipeTransform {
     const formattedMinutes = minutes.toString().padStart(2, '0');
     const formattedSeconds = seconds.toString().padStart(2, '0');
     // Retourner la chaîne formatée
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+    return `${formattedHours}h ${formattedMinutes}mn ${formattedSeconds}s`;
   }
 
 }
