@@ -23,8 +23,46 @@
     </form>
 
 </header>
+<h2>Courbes des données captées</h2>
 <section class="charts">
     <article>
         <canvas id="chartLignes">{{ lineChart }}</canvas>
     </article>
+</section>
+<section class="cartel">
+    <article>
+        <h3>Durées cumulées</h3>
+        <div>
+            <div>
+                <span class="material-icons">directions_run</span>
+                <p>La machine a fonctionné</p>
+                <h4>{{ durees.fonctionnement | duree }}</h4>
+            </div>
+            <div>
+                <span class="material-icons">directions_walk</span>
+                <p>La machine était arretée</p>
+                <h4>{{ durees.arret | duree }}</h4>
+            </div>
+            <div>
+                <span class="material-icons">run_circle</span>
+                <p>Temps global pris en compte</p>
+                <h4>{{ filtres.time_debut | duree:filtres.time_fin }}</h4>
+            </div>
+        </div>
+    </article>
+    <!-- <article>
+        <h3>Moyennes des durées</h3>
+        <div>
+            <div>
+                <span class="material-icons">alarm_on</span>
+                <h4>{{ filtres.debut | duree:filtres.fin }}</h4>
+                <p>Fonctionnement</p>
+            </div>
+            <div>
+                <span class="material-icons">alarm_off</span>
+                <h4>{{ filtres.debut | duree:filtres.fin }}</h4>
+                <p>Arrêt</p>
+            </div>
+        </div>
+    </article> -->
 </section>
