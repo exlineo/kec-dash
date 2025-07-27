@@ -10,8 +10,7 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-capteurs',
   imports: [FormsModule, DureePipe],
-  templateUrl: './capteurs.component.html',
-  styleUrl: './capteurs.component.css'
+  templateUrl: './capteurs.component.html'
 })
 export class CapteursComponent implements OnInit {
 
