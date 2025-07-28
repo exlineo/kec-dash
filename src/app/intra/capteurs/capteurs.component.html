@@ -50,19 +50,14 @@
             </div>
         </div>
     </article>
-    <!-- <article>
-        <h3>Moyennes des durées</h3>
+    <article>
+        <h3>Consommations électriques</h3>
         <div>
             <div>
-                <span class="material-icons">alarm_on</span>
-                <h4>{{ filtres.debut | duree:filtres.fin }}</h4>
-                <p>Fonctionnement</p>
-            </div>
-            <div>
-                <span class="material-icons">alarm_off</span>
-                <h4>{{ filtres.debut | duree:filtres.fin }}</h4>
-                <p>Arrêt</p>
+                <span class="material-icons">electric_meter</span>
+                <p>Approximation en kWh</p>
+                <h4>{{ durees.fonctionnement | conso:c.kit?.machine }}</h4>
             </div>
         </div>
-    </article> -->
+    </article>
 </section>

@@ -10,7 +10,10 @@ export class CapteursService {
   fire: Firestore = inject(Firestore);
 
   kits: Array<KitI> = [];
+  kit?:KitI;
   capteurs = signal<Array<any>>([]);
+
+  constructor() { this.getKits(); }
 
   getKits() {
     getDocs(collection(this.fire, "kec-kits")).then((snap: QuerySnapshot) => {

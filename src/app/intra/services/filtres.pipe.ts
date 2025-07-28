@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { MachineI } from './modeles';
 
 @Pipe({
   name: 'time'
@@ -43,5 +44,16 @@ export class DureePipe implements PipeTransform {
     // Retourner la chaîne formatée
     return `${formattedHours}h ${formattedMinutes}mn ${formattedSeconds}s`;
   }
-
+}
+@Pipe({
+  name: 'conso'
+})
+export class ConsoPipe implements PipeTransform {
+  /** Durée en heures et la machine concernée */
+  transform(duree: number, machine?: MachineI): string {
+    if(!duree || duree === 0 || !machine) return '';
+    duree = duree / 3600;
+    /// Consommation : p (en watts) = voltage * amperage * temps de travail : 220v / 217 watts/h
+    return (duree * machine.watts).toFixed(2) + ' kWh';
+  }
 }
