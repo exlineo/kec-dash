@@ -1,11 +1,12 @@
 
-<h1>Gérer les kits @if(!edit){
-    <a (click)="edit = true" class="position-droite"><span class="material-icons">add</span></a>
-    }</h1>
+<h1>Gérer les kits @if(!edit && !kit){
+    <a (click)="addKit()" class="position-droite">
+        <span class="material-icons">add</span>
+    </a>}</h1>
 <header class="bg-sombre">
-    @if(edit) {
-    <form>
-        <h2>Créer un kit</h2>
+    @if(edit && kit && !delete) {
+    <form [@apparait]="edit && kit && !delete">
+        <h2>Créer / modifier un kit</h2>
         <article class="horizon">
         <fieldset>
             <label>Identifiant</label>
@@ -36,12 +37,20 @@
             <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
         </fieldset>
         <fieldset class="ligne">
-            <button type="reset" (click)="edit = false">Annuler</button>
-            <button type="submit">Créer</button>
+            <button type="reset" (click)="annule()">Annuler</button>
+            <button type="submit">Valider</button>
         </fieldset>
         </article>
     </form>
-
+    }
+    @if(delete && kit && !edit) {
+        <article [@apparait]="delete && kit && !edit">
+            <p>Voulez-vous vraimentement supprimer ce kit ?</p>
+            <div class="ligne">
+                <button (click)="annule()">Annuler</button>
+                <button (click)="c.deleteKit(kit.id)">Supprimer</button>
+            </div>
+        </article>
     }
 </header>
 <section>
@@ -54,6 +63,7 @@
                 <th>ville</th>
                 <th>Code postal</th>
                 <th>Date de mise en service</th>
+                <th>Abonnement</th>
                 <th>Géolocalisation</th>
                 <th></th>
             </tr>
@@ -67,8 +77,14 @@
         <td>{{ kit.ville }}</td>
         <td>{{ kit.codePostal }}</td>
         <td>{{ kit.creation | toDate }}</td>
+        <td>@if(kit.abonnement && kit.abonnement > 0){ <span class="material-icons">card_membership</span> } </td>
         <td>@if(kit.geo && kit.geo.lat && kit.geo.lon){<a href="http://www.openstreetmap.org/#map=16/{{ kit.geo.lat }}/{{ kit.geo.lon }}" target="_blank"><span class="material-icons">map</span></a>}</td>
-        <td></td>
+        <td>
+            <div class="ligne">
+            <button (click)="editKit(kit)"><span class="material-icons">edit</span></button>
+            <button (click)="delKit(kit)"><span class="material-icons">delete_forever</span></button>
+            </div>
+        </td>
     </tr>
     }
     </tbody>

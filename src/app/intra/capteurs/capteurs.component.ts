@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 import { ConsoPipe, DureePipe, TimePipe } from '../services/filtres.pipe';
 import { UtilsService } from '../../extra/services/utils.service';
-import { KitI } from '../services/modeles';
+import { KitI, MachineI } from '../services/modeles';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-capteurs',
-  imports: [FormsModule, DureePipe, ConsoPipe ],
+  imports: [FormsModule, DureePipe, ConsoPipe],
   templateUrl: './capteurs.component.html'
 })
 export class CapteursComponent implements OnInit {
@@ -40,9 +40,15 @@ export class CapteursComponent implements OnInit {
   }
   ngOnInit() {
   }
+  /** Kit choisi */
+  setKit(kit: string) {
+    this.c.kit = this.c.kits.find((k: KitI) => k.id == kit);
+    this.c.kit!.machine = this.c.machines.find((m: MachineI) => m.id == this.c.kit!.idMachine);
+  }
 
+  /** Rechercher des données */
   getCapteursData() {
-    if(this.c.kits.length == 0 && this.filtres.kit && this.filtres.kit != '') this.c.kit = this.c.kits.find((k:KitI) => k.id == this.filtres.kit);
+    if (this.c.kits.length == 0 && this.filtres.kit && this.filtres.kit != '') this.c.kit = this.c.kits.find((k: KitI) => k.id == this.filtres.kit);
     // console.log(this.filtres);
     this.filtres.time_debut = this.tp.transform(this.filtres.debut);
     this.filtres.time_fin = this.tp.transform(this.filtres.fin);
@@ -147,16 +153,16 @@ export class CapteursComponent implements OnInit {
 
     return ecarts;
   }
-  sommeEcarts(timestamps:Array<number>) {
+  sommeEcarts(timestamps: Array<number>) {
     let sommeEcartsMs = 0;
-    
+
     for (let i = 1; i < timestamps.length; i++) {
-        const ecartMs = timestamps[i] - timestamps[i-1];
-        if (ecartMs > 15000) { // 30 000 ms = 30 secondes
-            sommeEcartsMs += ecartMs;
-        }
+      const ecartMs = timestamps[i] - timestamps[i - 1];
+      if (ecartMs > 15000) { // 30 000 ms = 30 secondes
+        sommeEcartsMs += ecartMs;
+      }
     }
-    
+
     return sommeEcartsMs;
-}
+  }
 }

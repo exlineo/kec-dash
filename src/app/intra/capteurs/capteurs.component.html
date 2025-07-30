@@ -3,9 +3,11 @@
     <form class="ligne" (submit)="getCapteursData()">
         <fieldset>
             <label>Sélectionner un kit</label>
-            <select name="kit" [(ngModel)]="filtres.kit">
+            <select name="kit" [(ngModel)]="filtres.kit" (change)="setKit(filtres.kit)">
                 <option value="">Tous</option>
-                <option value="0001">Kit 1</option>
+                @for(kit of c.kits; track kit.id){
+                    <option [value]="kit.id">{{ kit.id }} - {{ kit.client }}</option>
+                }
             </select>
         </fieldset>
         <fieldset>
@@ -23,7 +25,9 @@
     </form>
 
 </header>
-<h2>Courbes des données captées</h2>
+<h2>Courbes des données captées
+    @if(c.kit) { (<em>kit sélectionné : {{ c.kit.id }} - {{ c.kit.client }}</em>) }
+</h2>
 <section class="charts">
     <article>
         <canvas id="chartLignes">{{ lineChart }}</canvas>

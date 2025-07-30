@@ -52,8 +52,8 @@ export class ConsoPipe implements PipeTransform {
   /** Durée en heures et la machine concernée */
   transform(duree: number, machine?: MachineI): string {
     if(!duree || duree === 0 || !machine) return '';
-    duree = duree / 3600;
+    const h = duree / 360000;
     /// Consommation : p (en watts) = voltage * amperage * temps de travail : 220v / 217 watts/h
-    return (duree * machine.watts).toFixed(2) + ' kWh';
+    return (h * machine.watts).toFixed(2) + ' kW';
   }
 }

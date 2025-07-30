@@ -10,6 +10,7 @@ export interface KitI {
     machine?:MachineI;
     idMachine?:string;
     geo:{lat:number, lon:number};
+    abonnement?: number;
 }
 export class Kit implements KitI {
     id = '';

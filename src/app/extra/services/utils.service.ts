@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UtilsService {
 
-  constructor() { }
+  msg?:{titre:string, infos:string};
   
   sendMail(email:string){
     window.open("mailto:" + atob(email) + "?subject=Contact depuis le site Internet&body=Bonjour, je suis interesse par votre offre.");
@@ -16,4 +16,11 @@ export class UtilsService {
   tpsArret(d:number, f:number){
     return f - d * 60000; // Temps en minutes 
   };
+  setMsg(titre?:string, infos?:string){
+    if(titre && infos){
+      this.msg = {titre, infos};
+    }else{
+      this.msg = undefined;
+    };
+  }
 }

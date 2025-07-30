@@ -3,3 +3,9 @@
 <router-outlet></router-outlet>
 </main>
 <app-pied></app-pied>
+@if(u.msg){
+    <article>
+        <h4>{{u.msg.titre}}</h4>
+        <p>{{u.msg.infos}}</p>
+    </article>
+}
