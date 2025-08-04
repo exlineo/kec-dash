@@ -1,64 +1,75 @@
-
 <h1>Gérer les kits @if(!edit && !kit){
     <a (click)="addKit()" class="position-droite">
         <span class="material-icons">add</span>
-    </a>}</h1>
-<header class="bg-sombre">
-    @if(edit && kit && !delete) {
-    <form [@apparait]="edit && kit && !delete">
+    </a>}
+</h1>
+@if(edit && kit && !delete) {
+<header class="lightbox">
+    <form [@apparait]="edit && kit && !delete" class="bg-sombre">
         <h2>Créer / modifier un kit</h2>
         <article class="horizon">
-        <fieldset>
-            <label>Identifiant</label>
-            <input name="id" [(ngModel)]="kit.id" required>
-        </fieldset>
-        <fieldset>
-            <label>Client</label>
-            <select name="client" [(ngModel)]="kit.client"></select>
-        </fieldset>
-        <fieldset>
-            <label>Adresse</label>
-            <input name="adresse" [(ngModel)]="kit.adresse">
-        </fieldset>
-        <fieldset>
-            <label>Code postal</label>
-            <input name="codepostal" type="number" [(ngModel)]="kit.codePostal">
-        </fieldset>
-        <fieldset>
-            <label>Ville</label>
-            <input name="ville" [(ngModel)]="kit.ville">
-        </fieldset>
-        <fieldset>
-            <label>Latitude</label>
-            <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
-        </fieldset>
-        <fieldset>
-            <label>Longitude</label>
-            <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
-        </fieldset>
-        <fieldset class="ligne">
-            <button type="reset" (click)="annule()">Annuler</button>
-            <button type="submit">Valider</button>
-        </fieldset>
+            <fieldset>
+                <label>Identifiant</label>
+                <input name="id" [(ngModel)]="kit.id" required>
+            </fieldset>
+            <fieldset>
+                <label>Client</label>
+                <select name="client" [(ngModel)]="kit.client"></select>
+            </fieldset>
+            <fieldset>
+                <label>Client</label>
+                <select name="idMachine" [(ngModel)]="kit.machine">
+                    @for(mach of c.machines; track mach.id){
+                    <option [value]="mach.id">{{ mach.marque }} ({{ mach.annee }} - {{ mach.gaz }})</option>
+                    }
+                </select>
+            </fieldset>
+            <fieldset>
+                <label>Adresse</label>
+                <input name="adresse" [(ngModel)]="kit.adresse">
+            </fieldset>
+            <fieldset>
+                <label>Code postal</label>
+                <input name="codepostal" type="number" [(ngModel)]="kit.codePostal">
+            </fieldset>
+            <fieldset>
+                <label>Ville</label>
+                <input name="ville" [(ngModel)]="kit.ville">
+            </fieldset>
+            <fieldset>
+                <label>Latitude</label>
+                <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
+            </fieldset>
+            <fieldset>
+                <label>Longitude</label>
+                <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
+            </fieldset>
+            <fieldset class="ligne">
+                <button type="reset" (click)="annule()">Annuler</button>
+                <button type="submit">Valider</button>
+            </fieldset>
         </article>
     </form>
-    }
-    @if(delete && kit && !edit) {
-        <article [@apparait]="delete && kit && !edit">
-            <p>Voulez-vous vraimentement supprimer ce kit ?</p>
-            <div class="ligne">
-                <button (click)="annule()">Annuler</button>
-                <button (click)="c.deleteKit(kit.id)">Supprimer</button>
-            </div>
-        </article>
-    }
 </header>
+}
+@if(delete && kit && !edit) {
+<header class="lightbox">
+    <article [@apparait]="delete && kit && !edit" class="bg-sombre centre">
+        <p>Voulez-vous vraiment supprimer ce kit ?</p>
+        <div class="ligne">
+            <button (click)="annule()">Annuler</button>
+            <button (click)="c.deleteKit(kit.id)">Supprimer</button>
+        </div>
+    </article>
+</header>
+}
 <section>
     <table>
         <thead>
             <tr>
                 <th>id</th>
                 <th>client</th>
+                <th>Machine</th>
                 <th>adresse</th>
                 <th>ville</th>
                 <th>Code postal</th>
@@ -69,24 +80,28 @@
             </tr>
         </thead>
         <tbody>
-    @for(kit of c.kits; track kit.id){
-    <tr>
-        <td>{{ kit.id }}</td>
-        <td>{{ kit.client }}</td>
-        <td>{{ kit.adresse }}</td>
-        <td>{{ kit.ville }}</td>
-        <td>{{ kit.codePostal }}</td>
-        <td>{{ kit.creation | toDate }}</td>
-        <td>@if(kit.abonnement && kit.abonnement > 0){ <span class="material-icons">card_membership</span> } </td>
-        <td>@if(kit.geo && kit.geo.lat && kit.geo.lon){<a href="http://www.openstreetmap.org/#map=16/{{ kit.geo.lat }}/{{ kit.geo.lon }}" target="_blank"><span class="material-icons">map</span></a>}</td>
-        <td>
-            <div class="ligne">
-            <button (click)="editKit(kit)"><span class="material-icons">edit</span></button>
-            <button (click)="delKit(kit)"><span class="material-icons">delete_forever</span></button>
-            </div>
-        </td>
-    </tr>
-    }
-    </tbody>
+            @for(kit of c.kits; track kit.id){
+            <tr>
+                <td>{{ kit.id }}</td>
+                <td>{{ kit.client }}</td>
+                <td>@if(kit.idMachine) { {{ kit.idMachine | machine:c.machines }} }</td>
+                <td>{{ kit.adresse }}</td>
+                <td>{{ kit.ville }}</td>
+                <td>{{ kit.codePostal }}</td>
+                <td>{{ kit.creation | toDate }}</td>
+                <td>@if(kit.abonnement && kit.abonnement > 0){ <span class="material-icons">card_membership</span> }
+                </td>
+                <td>@if(kit.geo && kit.geo.lat && kit.geo.lon){<a
+                        href="http://www.openstreetmap.org/#map=16/{{ kit.geo.lat }}/{{ kit.geo.lon }}"
+                        target="_blank"><span class="material-icons">map</span></a>}</td>
+                <td>
+                    <div class="ligne">
+                        <button (click)="editKit(kit)"><span class="material-icons">edit</span></button>
+                        <button (click)="delKit(kit)"><span class="material-icons">delete_forever</span></button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
     </table>
 </section>

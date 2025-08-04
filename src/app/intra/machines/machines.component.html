@@ -1,0 +1,119 @@
+<h1>Gérer les machines @if(!edit && !machine){
+    <a (click)="addMach()" class="position-droite">
+        <span class="material-icons">add</span>
+    </a>}
+</h1>
+@if(edit && machine && !delete) {
+<header class="lightbox">
+    <form [@apparait]="edit && machine && !delete" class="bg-sombre centre">
+        <h2>Créer / modifier un machine</h2>
+        <article class="horizon">
+            <div class="ligne">
+                <fieldset>
+                    <label>Identifiant</label>
+                    <input name="id" [(ngModel)]="machine.id" required>
+                </fieldset>
+                <fieldset>
+                    <label>Marque</label>
+                    <select name="marque" [(ngModel)]="machine.marque"></select>
+                </fieldset>
+            </div>
+            <div class="ligne">
+                <fieldset>
+                    <label>Année de fabrication</label>
+                    <input name="annee" type="number" [(ngModel)]="machine.annee">
+                </fieldset>
+                <fieldset>
+                    <label>Type de gaz</label>
+                    <select>
+                        <option value="R32"></option>
+                        <option value="R32"></option>
+                        <option value="R32"></option>
+                        <option value="R32"></option>
+                        <option value="R32"></option>
+                        <option value="R32"></option>
+                    </select>
+                </fieldset>
+            </div>
+            <div class="ligne">
+                <fieldset>
+                    <label>Watt/h</label>
+                    <input name="watts" type="number" [(ngModel)]="machine.watts">
+                </fieldset>
+                <fieldset>
+                    <label>Ampères</label>
+                    <input name="amperes" type="number" [(ngModel)]="machine.amperes">
+                </fieldset>
+                <fieldset>
+                    <label>Voltage</label>
+                    <input name="volts" [(ngModel)]="machine.volts">
+                </fieldset>
+            </div>
+
+            <div class="ligne">
+                <fieldset>
+                    <label>Chaud</label>
+                    <input name="chaud" type="number" [(ngModel)]="machine.chaud">
+                </fieldset>
+                <fieldset>
+                    <label>Froid</label>
+                    <input name="froid" type="number" [(ngModel)]="machine.froid">
+                </fieldset>
+            </div>
+            <fieldset class="ligne">
+                <button type="reset" (click)="annule()">Annuler</button>
+                <button type="submit">Valider</button>
+            </fieldset>
+        </article>
+    </form>
+</header>
+}
+@if(delete && machine && !edit) {
+<header class="lightbox">
+    <article [@apparait]="delete && machine && !edit" class="bg-sombre centre">
+        <p>Il n'est pas nécessaire qu'une machine soit liée à un kit. Il n'est pas nécessaire de la supprimer, elle pourrait resservir pour d'autres.</p>
+        <p>Voulez-vous vraiment supprimer cette machine ?</p>
+        <div class="ligne">
+            <button (click)="annule()">Annuler</button>
+            <button (click)="c.deleteMachine(machine.id)">Supprimer</button>
+        </div>
+    </article>
+</header>
+}
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Marque</th>
+                <th>Année</th>
+                <th>Watts/h</th>
+                <th>Ampérage</th>
+                <th>Voltage</th>
+                <th>Gaz</th>
+                <th>Limite</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(machine of c.machines; track machine.id){
+            <tr>
+                <td>{{ machine.id }}</td>
+                <td>{{ machine.marque }}</td>
+                <td>{{ machine.annee }}</td>
+                <td>{{ machine.watts }} Wh</td>
+                <td>{{ machine.amperes }} A</td>
+                <td>{{ machine.volts }} V</td>
+                <td>{{ machine.gaz }}</td>
+                <td>{{ machine.limite }}°C</td>
+                <td>
+                    <div class="ligne">
+                        <button (click)="editMach(machine)"><span class="material-icons">edit</span></button>
+                        <button (click)="delMach(machine)"><span class="material-icons">delete_forever</span></button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

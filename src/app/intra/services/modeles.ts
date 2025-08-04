@@ -2,7 +2,7 @@ export interface KitI {
     id:string;
     idClient:string | number;
     client:string;
-    adresse:string;
+    adresse?:string;
     codePostal:number;
     ville:string;
     pays:string;
@@ -40,14 +40,14 @@ export interface MachineI{
 export class Machine implements MachineI{
     id = '';
     marque = '';
-    amperes = 0;
+    annee = 0;
     watts = 0;
+    amperes = 0;
     volts = 0;
     gaz = '';
     limite = 32;
     chaud = 0;
     froid = 0;
-    annee = 0;
 }
 export interface CaptI {
     id:string;

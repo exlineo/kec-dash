@@ -80,6 +80,7 @@ export class CapteursComponent implements OnInit {
     const tm: any = []; // Temperature machine
     const vm: any = []; // Vibration
     const cm: any = []; // Courant
+    const urge:any = []; // Urgence déclenché pour voir si l'aspersion est interdite
     const h2o: any = [];
     const etiquettes: any = [];
     this.durees = { arret: 0, fonctionnement: 0 };
@@ -113,6 +114,7 @@ export class CapteursComponent implements OnInit {
       vm.push(c.vib);
       cm.push(c.hall);
       h2o.push(c.h2o);
+      urge.push(c.u * 50);
       etiquettes.push(new Date(c.timestamp).toLocaleString());
     });
 
@@ -121,7 +123,8 @@ export class CapteursComponent implements OnInit {
       datasets: [
         this.setChartDataset('Temperature ambiante', ta, '#ff0000'),
         this.setChartDataset('Humidité ambiante', ha, '#00ff00'),
-        this.setChartDataset('Temperature machine', tm, '#0000ff')
+        this.setChartDataset('Temperature machine', tm, '#0000ff'),
+        this.setChartDataset("Interdiction d'aspersion", tm, '#939393ff')
         // this.setChartDataset('Vibration', vm, '#ff00ff'),
         // this.setChartDataset('Courant', cm, '#ffff00'),
         // this.setChartDataset('H2O', h2o, '#00ffff'),

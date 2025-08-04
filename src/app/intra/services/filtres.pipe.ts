@@ -57,3 +57,15 @@ export class ConsoPipe implements PipeTransform {
     return (h * machine.watts).toFixed(2) + ' kW';
   }
 }
+
+@Pipe({
+  name: 'machine'
+})
+export class MachinePipe implements PipeTransform {
+  /** Durée en heures et la machine concernée */
+  transform(id: string, machines?: Array<MachineI>): string {
+    if(!id || !machines) return '';
+    const mach = machines.find((m: MachineI) => m.id == id)!;
+    return mach ? mach.marque + ' (' + mach.annee + ' - ' + mach.gaz + ')' : '';
+  }
+}

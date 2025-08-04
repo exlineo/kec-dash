@@ -94,6 +94,7 @@ button {
     background-color: var(--bleu);
     color: var(--clair);
     font-size: 16px;
+    font-family: "Noto Sans", sans-serif;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 }
@@ -187,6 +188,7 @@ select {
     border: none;
     background-color: var(--clair);
     color: var(--sombre);
+    border: 2px solid rgba(0,0,0,0.4);
     font-size: 16px;
     font-family: "Noto Sans", sans-serif;
 }
@@ -318,11 +320,11 @@ table th {
     width: 100%;
 }
 
-section.centre {
+.centre {
     text-align: center;
 }
 
-section.centre>* {
+.centre>* {
     justify-content: center;
 }
 
@@ -484,7 +486,21 @@ span.separation {
     background-color: rgba(255, 255, 255, 0.3);
     flex: none;
 }
-
+.lightbox{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    height:100vh;
+    background-color:rgba(190, 50, 108, 0.8);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.lightbox > *:nth-child(1){
+    margin:auto;
+    max-width:70%;
+}
 /* .icones > figure > img {
     width:75px;
     height:75px;
