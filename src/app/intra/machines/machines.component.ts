@@ -32,7 +32,6 @@ export class MachinesComponent {
     this.edit = true;
     this.delete = false;
     this.machine = mach;
-    this.c.setMachine(this.machine);
   }
   delMach(mach: MachineI) {
     this.delete = true;

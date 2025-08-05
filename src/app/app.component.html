@@ -1,11 +1,13 @@
 <app-entete></app-entete>
 <main>
-<router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+    @if(u.msg){
+    <section id="msg">
+        <article [class]="u.classe">
+            <h4>{{u.msg.titre}}</h4>
+            <p>{{u.msg.infos}}</p>
+        </article>
+    </section>
+    }
 </main>
 <app-pied></app-pied>
-@if(u.msg){
-    <article>
-        <h4>{{u.msg.titre}}</h4>
-        <p>{{u.msg.infos}}</p>
-    </article>
-}

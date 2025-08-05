@@ -1,5 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Firestore, collection, QuerySnapshot, query, doc, getDocs, getDoc, setDoc, where, deleteDoc } from '@angular/fire/firestore';
+import { Firestore, collection, QuerySnapshot, query, doc, getDocs, getDoc, setDoc, where, deleteDoc, addDoc } from '@angular/fire/firestore';
 import { KitI, MachineI } from './modeles';
 import { UtilsService } from '../../extra/services/utils.service';
 
@@ -60,9 +60,14 @@ export class CapteursService {
     //   this.u.setMsg("Données chargées", "Recueil des données des capteurs du kit");
     // }
   }
-  async getCapteurByTemps(debut: number = 0, fin: number = Date.now()) {
+  async getCapteurByTemps(debut: number = 0, fin: number = Date.now(), kit?:KitI) {
     // ref.where("timestamp", ">=", "2017-11").where("timestamp", "<", "2017-12")
-    const q = query(collection(this.fire, "kec-capteurs"), where("timestamp", ">=", debut), where("timestamp", "<", fin));
+    let q:any;
+    if(kit){
+      q = query(collection(this.fire, "kec-capteurs"), where("k", "==", kit.id), where("timestamp", ">=", debut), where("timestamp", "<", fin));
+    }else{
+      q = query(collection(this.fire, "kec-capteurs"), where("timestamp", ">=", debut), where("timestamp", "<", fin));
+    }
     console.log(debut, fin);
     const snap = await getDocs(q);
 
@@ -74,19 +79,40 @@ export class CapteursService {
     console.log(this.capteurs());
   };
   /** Créer un nouveau kit */
+  async addKit(kit: KitI) {
+    const ref = collection(this.fire, "kec-machines");
+    addDoc(ref, kit).then(() => {
+      this.kits.push(kit);
+      this.u.setMsg("Ajout de la machine", "C'est ok pour l'ajout de la machine");
+    });
+  }
   async setKit(kit: KitI) {
     const ref = collection(this.fire, "kec-kits");
     await setDoc(doc(ref, kit.id), kit).then(() => this.u.setMsg("Mise à jour du kit", "C'est ok pour la mise à jour du kit"));
   }
-  /** Créer un nouveau kit */
-  async setMachine(machine: MachineI) {
+  /** Créer une nouvelle machine */
+  async addMachine(machine: MachineI) {
+    const ref = collection(this.fire, "kec-machines");
+    addDoc(ref, machine).then(() => {
+      this.machines.push(machine);
+      this.u.setMsg("Ajout de la machine", "C'est ok pour l'ajout de la machine");
+    });
+  }
+  async setMachine(machine: any) {
     const ref = collection(this.fire, "kec-machines");
     await setDoc(doc(ref, machine.id), machine).then(() => this.u.setMsg("Mise à jour de la machine", "C'est ok pour la mise à jour de la machine"));
   }
   async deleteKit(id: string) {
-    await deleteDoc(doc(this.fire, "kec-kits", id)).then(() => this.u.setMsg("Suppression du kit", "C'est ok pour la suppresion du kit"));
+    await deleteDoc(doc(this.fire, "kec-kits", id)).then(() => {
+      const index = this.kits.findIndex((k: KitI) => k.id == id);
+      this.kits.splice(index, 1);
+      this.u.setMsg("Suppression du kit", "C'est ok pour la suppresion du kit")});
   }
   async deleteMachine(id: string) {
-    await deleteDoc(doc(this.fire, "kec-machines", id)).then(() => this.u.setMsg("Suppresion de la machine", "C'est ok pour la suppression de la machine"));
+    await deleteDoc(doc(this.fire, "kec-machines", id)).then(() => {
+      const index = this.machines.findIndex((m: MachineI) => m.id == id);
+      this.machines.splice(index, 1);
+      this.u.setMsg("Suppresion de la machine", "C'est ok pour la suppression de la machine");
+    });
   }
 }

@@ -44,15 +44,6 @@ a:hover {
     font-weight: 600;
 }
 
-a:after {
-    border-bottom: 1px solid var(--clair);
-    /* width:0; */
-}
-
-a:hover:after {
-    width: 100%;
-}
-
 main,
 section,
 article,
@@ -69,27 +60,11 @@ article {
     padding: 20px;
 }
 
-a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: var(--clair);
-    bottom: -5px;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s ease-out;
-}
-
-a:hover::after {
-    transform: scaleX(1);
-}
-
 button {
     display: flex;
     width: fit-content;
     padding: 20px 25px;
+    margin:0 10px;
     border: none;
     background-color: var(--bleu);
     color: var(--clair);
@@ -327,7 +302,79 @@ table th {
 .centre>* {
     justify-content: center;
 }
+/* INFOS de bas de page */
+#msg {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  z-index: 999;
+  min-height:fit-content;
+}
 
+#msg article {
+  width: fit-content;
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px 20px;
+  color: var(--clair);
+}
+article.invalide{
+    color: var(--sombre);
+    background-color: var(--jaune);
+}
+article.valide{
+    background-color: var(--vert);
+    color: var(--sombre);
+}
+article.danger{
+    background-color: var(--rose);
+    color: var(--sombre);
+}
+/* CROIX */
+.croix {
+  width: 40px;
+  height: 40px;
+  margin: 20px auto;
+  border-radius: 50% 50%;
+  position: relative;
+  transition: all .3s ease;
+}
+
+.croix:before {
+  background: var(--clair);
+  position: absolute;
+  display: block;
+  content: '';
+  width: 70%;
+  height: 6%;
+  top: 47%;
+  left: 15%;
+  transform: rotate(45deg);
+}
+
+.croix:after {
+  background: var(--clair);
+  position: absolute;
+  display: block;
+  content: '';
+  width: 6%;
+  height: 70%;
+  left: 47%;
+  top: 15%;
+  transform: rotate(45deg);
+}
+
+.croix:hover {
+  transform: rotate(90deg) scale(1.2);
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--clair);
+  font-size: large;
+}
 .horizon {
     flex-flow: row wrap;
 }
@@ -356,7 +403,15 @@ section.horizon>figure {
     justify-content: space-around;
     align-items: center;
 }
+form div.ligne {
+    width:100%;
+    display: flex;
+    flex-flow:row nowrap;
+    justify-content: space-between;
+}
+fieldset.ligne {
 
+}
 .titre {
     text-align: center;
     color: var(--clair);

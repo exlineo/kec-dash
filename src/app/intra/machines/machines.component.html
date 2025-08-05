@@ -6,6 +6,7 @@
 @if(edit && machine && !delete) {
 <header class="lightbox">
     <form [@apparait]="edit && machine && !delete" class="bg-sombre centre">
+        <a class="close croix" (click)="annule()"></a>
         <h2>Créer / modifier un machine</h2>
         <article class="horizon">
             <div class="ligne">
@@ -15,23 +16,24 @@
                 </fieldset>
                 <fieldset>
                     <label>Marque</label>
-                    <select name="marque" [(ngModel)]="machine.marque"></select>
-                </fieldset>
-            </div>
-            <div class="ligne">
-                <fieldset>
-                    <label>Année de fabrication</label>
-                    <input name="annee" type="number" [(ngModel)]="machine.annee">
+                    <select name="marque" [(ngModel)]="machine.marque">
+                        <option disabled>Choisir un fluide frigorigène</option>
+                    </select>
                 </fieldset>
                 <fieldset>
                     <label>Type de gaz</label>
                     <select>
-                        <option value="R32"></option>
-                        <option value="R32"></option>
-                        <option value="R32"></option>
-                        <option value="R32"></option>
-                        <option value="R32"></option>
-                        <option value="R32"></option>
+                        <option disabled>Choisir un fluide</option>
+                        <option value="R10">R10</option>
+                        <option value="R11">R11</option>
+                        <option value="R12">R12</option>
+                        <option value="R32">R32</option>
+                        <option value="R40">R40</option>
+                        <option value="R41">R41</option>
+                        <option value="RE134">RE134</option>
+                        <option value="RE134a">RE134a</option>
+                        <option value="R140">R140</option>
+                        <option value="R140a">R140a</option>
                     </select>
                 </fieldset>
             </div>
@@ -49,8 +51,11 @@
                     <input name="volts" [(ngModel)]="machine.volts">
                 </fieldset>
             </div>
-
             <div class="ligne">
+                <fieldset>
+                    <label>Année de fabrication</label>
+                    <input name="annee" type="number" [(ngModel)]="machine.annee">
+                </fieldset>
                 <fieldset>
                     <label>Chaud</label>
                     <input name="chaud" type="number" [(ngModel)]="machine.chaud">
@@ -62,7 +67,11 @@
             </div>
             <fieldset class="ligne">
                 <button type="reset" (click)="annule()">Annuler</button>
-                <button type="submit">Valider</button>
+                @if(machine.id) {
+                    <button type="submit" (click)="c.setMachine(machine)">Modifier</button>
+                }@else {
+                    <button type="submit" (click)="c.addMachine(machine)">Ajouter</button>
+                }
             </fieldset>
         </article>
     </form>
@@ -71,6 +80,7 @@
 @if(delete && machine && !edit) {
 <header class="lightbox">
     <article [@apparait]="delete && machine && !edit" class="bg-sombre centre">
+        <a class="close croix" (click)="annule()"></a>
         <p>Il n'est pas nécessaire qu'une machine soit liée à un kit. Il n'est pas nécessaire de la supprimer, elle pourrait resservir pour d'autres.</p>
         <p>Voulez-vous vraiment supprimer cette machine ?</p>
         <div class="ligne">

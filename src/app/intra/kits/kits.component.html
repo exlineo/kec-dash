@@ -6,8 +6,10 @@
 @if(edit && kit && !delete) {
 <header class="lightbox">
     <form [@apparait]="edit && kit && !delete" class="bg-sombre">
+        <a class="close croix" (click)="annule()"></a>
         <h2>Créer / modifier un kit</h2>
         <article class="horizon">
+            <div class="ligne">
             <fieldset>
                 <label>Identifiant</label>
                 <input name="id" [(ngModel)]="kit.id" required>
@@ -17,13 +19,15 @@
                 <select name="client" [(ngModel)]="kit.client"></select>
             </fieldset>
             <fieldset>
-                <label>Client</label>
+                <label>Type de machine</label>
                 <select name="idMachine" [(ngModel)]="kit.machine">
                     @for(mach of c.machines; track mach.id){
                     <option [value]="mach.id">{{ mach.marque }} ({{ mach.annee }} - {{ mach.gaz }})</option>
                     }
                 </select>
             </fieldset>
+            </div>
+            <div class="ligne">
             <fieldset>
                 <label>Adresse</label>
                 <input name="adresse" [(ngModel)]="kit.adresse">
@@ -36,6 +40,8 @@
                 <label>Ville</label>
                 <input name="ville" [(ngModel)]="kit.ville">
             </fieldset>
+            </div>
+            <div class="ligne">
             <fieldset>
                 <label>Latitude</label>
                 <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
@@ -44,6 +50,7 @@
                 <label>Longitude</label>
                 <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
             </fieldset>
+            </div>
             <fieldset class="ligne">
                 <button type="reset" (click)="annule()">Annuler</button>
                 <button type="submit">Valider</button>
@@ -55,6 +62,7 @@
 @if(delete && kit && !edit) {
 <header class="lightbox">
     <article [@apparait]="delete && kit && !edit" class="bg-sombre centre">
+        <a class="close croix" (click)="annule()"></a>
         <p>Voulez-vous vraiment supprimer ce kit ?</p>
         <div class="ligne">
             <button (click)="annule()">Annuler</button>

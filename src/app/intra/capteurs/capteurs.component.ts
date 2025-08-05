@@ -69,7 +69,7 @@ export class CapteursComponent implements OnInit {
       borderColor: color,
       backgroundColor: color,
       pointStyle: 'circle',
-      pointRadius: 2,
+      pointRadius: 1,
       pointHoverRadius: 10
     }
   }
@@ -128,7 +128,7 @@ export class CapteursComponent implements OnInit {
         this.setChartDataset('Temperature ambiante', ta, '#ff0000'),
         this.setChartDataset('Humidité ambiante', ha, '#00ff00'),
         this.setChartDataset('Temperature machine', tm, '#0000ff'),
-        this.setChartDataset("Interdiction d'aspersion", urge, '#939393ff')
+        this.setChartDataset("Interdiction d'aspersion", urge, '#cececeff')
         // this.setChartDataset('Vibration', vm, '#ff00ff'),
         // this.setChartDataset('Courant', cm, '#ffff00'),
         // this.setChartDataset('H2O', h2o, '#00ffff'),
@@ -148,7 +148,7 @@ export class CapteursComponent implements OnInit {
 
     for (let i = 1; i < timestamps.length; i++) {
       const ecartMs = timestamps[i] - timestamps[i - 1];
-      if (ecartMs > 30000) { // 30 000 ms = 30 secondes
+      if (ecartMs > 60000) { // 30 000 ms = 30 secondes
         sommeEcartsMs += ecartMs;
       }
     }
