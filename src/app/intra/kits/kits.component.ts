@@ -15,29 +15,29 @@ export class KitsComponent implements OnInit{
 
   c:CapteursService = inject(CapteursService);
 
-  edit:boolean = false;
-  delete:boolean = false;
+  edit:string = '';
   kit?:KitI;
 
   ngOnInit(){
   }
   addKit(){
     this.kit = new Kit();
-    this.edit = true;
+    this.edit = 'add';
   }
   annule(){
-    this.edit = false;
-    this.delete = false;
+    this.edit = '';
     this.kit = undefined;
   }
   editKit(kit:KitI){
-    this.edit = true;
-    this.delete = false;
+    this.edit = 'edit';
     this.kit = kit;
   }
   delKit(kit:KitI){
-    this.delete = true;
-    this.edit = false;
+    this.edit = 'delete';
     this.kit = kit;
+  }
+  upKit(){
+    this.edit == 'add' ? this.c.addKit(this.kit!) : this.c.setKit(this.kit!);
+    this.edit = '';
   }
 }

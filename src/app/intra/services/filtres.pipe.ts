@@ -25,7 +25,6 @@ export class ToDatePipe implements PipeTransform {
   name: 'duree'
 })
 export class DureePipe implements PipeTransform {
-
   transform(debut: number, fin?: number): string {
     if(!debut || debut === 0) return '0h 0mn 0s';
     // Convertir le timestamp en secondes

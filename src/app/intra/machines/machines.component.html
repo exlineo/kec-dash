@@ -3,9 +3,9 @@
         <span class="material-icons">add</span>
     </a>}
 </h1>
-@if(edit && machine && !delete) {
+@if((edit=='edit' || edit=='add') && machine) {
 <header class="lightbox">
-    <form [@apparait]="edit && machine && !delete" class="bg-sombre centre">
+    <form [@apparait]="(edit=='edit' || edit=='add') && machine" class="bg-sombre centre" (submit)="upMachine()">
         <a class="close croix" (click)="annule()"></a>
         <h2>Créer / modifier un machine</h2>
         <article class="horizon">
@@ -16,13 +16,11 @@
                 </fieldset>
                 <fieldset>
                     <label>Marque</label>
-                    <select name="marque" [(ngModel)]="machine.marque">
-                        <option disabled>Choisir un fluide frigorigène</option>
-                    </select>
+                    <input name="marque" [(ngModel)]="machine.marque">
                 </fieldset>
                 <fieldset>
                     <label>Type de gaz</label>
-                    <select>
+                    <select [(ngModel)]="machine.gaz">
                         <option disabled>Choisir un fluide</option>
                         <option value="R10">R10</option>
                         <option value="R11">R11</option>
@@ -67,19 +65,19 @@
             </div>
             <fieldset class="ligne">
                 <button type="reset" (click)="annule()">Annuler</button>
-                @if(machine.id) {
-                    <button type="submit" (click)="c.setMachine(machine)">Modifier</button>
+                @if(edit=='edit') {
+                    <button type="submit">Modifier</button>
                 }@else {
-                    <button type="submit" (click)="c.addMachine(machine)">Ajouter</button>
+                    <button type="submit">Valider</button>
                 }
             </fieldset>
         </article>
     </form>
 </header>
 }
-@if(delete && machine && !edit) {
+@if(edit=='del' && machine) {
 <header class="lightbox">
-    <article [@apparait]="delete && machine && !edit" class="bg-sombre centre">
+    <article [@apparait]="edit=='del' && machine" class="bg-sombre centre">
         <a class="close croix" (click)="annule()"></a>
         <p>Il n'est pas nécessaire qu'une machine soit liée à un kit. Il n'est pas nécessaire de la supprimer, elle pourrait resservir pour d'autres.</p>
         <p>Voulez-vous vraiment supprimer cette machine ?</p>
@@ -106,7 +104,7 @@
             </tr>
         </thead>
         <tbody>
-            @for(machine of c.machines; track machine.id){
+            @for(machine of c.machines; track $index){
             <tr>
                 <td>{{ machine.id }}</td>
                 <td>{{ machine.marque }}</td>

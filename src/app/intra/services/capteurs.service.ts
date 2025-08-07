@@ -79,11 +79,13 @@ export class CapteursService {
     console.log(this.capteurs());
   };
   /** Créer un nouveau kit */
-  async addKit(kit: KitI) {
-    const ref = collection(this.fire, "kec-machines");
-    addDoc(ref, kit).then(() => {
+  addKit(kit: any) {
+    console.log("Add kit", kit);
+    delete(kit.machine);
+    const ref = collection(this.fire, "kec-kits");
+    addDoc(ref, {...kit}).then(() => {
       this.kits.push(kit);
-      this.u.setMsg("Ajout de la machine", "C'est ok pour l'ajout de la machine");
+      this.u.setMsg("Ajout d'un kit", "Cool, le kit a été ajouté");
     });
   }
   async setKit(kit: KitI) {
@@ -93,23 +95,23 @@ export class CapteursService {
   /** Créer une nouvelle machine */
   async addMachine(machine: MachineI) {
     const ref = collection(this.fire, "kec-machines");
-    addDoc(ref, machine).then(() => {
+    addDoc(ref, {...machine}).then(() => {
       this.machines.push(machine);
       this.u.setMsg("Ajout de la machine", "C'est ok pour l'ajout de la machine");
     });
   }
-  async setMachine(machine: any) {
+  setMachine(machine: any) {
     const ref = collection(this.fire, "kec-machines");
-    await setDoc(doc(ref, machine.id), machine).then(() => this.u.setMsg("Mise à jour de la machine", "C'est ok pour la mise à jour de la machine"));
+    setDoc(doc(ref, machine.id), {...machine}).then(() => this.u.setMsg("Mise à jour de la machine", "C'est ok pour la mise à jour de la machine"));
   }
-  async deleteKit(id: string) {
-    await deleteDoc(doc(this.fire, "kec-kits", id)).then(() => {
+  deleteKit(id: string) {
+    deleteDoc(doc(this.fire, "kec-kits", id)).then(() => {
       const index = this.kits.findIndex((k: KitI) => k.id == id);
       this.kits.splice(index, 1);
       this.u.setMsg("Suppression du kit", "C'est ok pour la suppresion du kit")});
   }
-  async deleteMachine(id: string) {
-    await deleteDoc(doc(this.fire, "kec-machines", id)).then(() => {
+  deleteMachine(id: string) {
+    deleteDoc(doc(this.fire, "kec-machines", id)).then(() => {
       const index = this.machines.findIndex((m: MachineI) => m.id == id);
       this.machines.splice(index, 1);
       this.u.setMsg("Suppresion de la machine", "C'est ok pour la suppression de la machine");

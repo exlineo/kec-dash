@@ -13,29 +13,29 @@ import { apparaitAnimation } from '../../extra/services/animations';
 export class MachinesComponent {
   c: CapteursService = inject(CapteursService);
 
-  edit: boolean = false;
-  delete: boolean = false;
+  edit: string = '';
   machine?: MachineI;
 
   ngOnInit() {
   }
   addMach() {
     this.machine = new Machine();
-    this.edit = true;
+    this.edit = 'add';
   }
   annule() {
-    this.edit = false;
-    this.delete = false;
+    this.edit = '';
     this.machine = undefined;
   }
   editMach(mach: MachineI) {
-    this.edit = true;
-    this.delete = false;
+    this.edit = 'edit';
     this.machine = mach;
   }
   delMach(mach: MachineI) {
-    this.delete = true;
-    this.edit = false;
+    this.edit = 'del';
     this.machine = mach;
+  }
+  upMachine(){
+    this.edit == 'add' ? this.c.addMachine(this.machine!) : this.c.setMachine(this.machine!);
+    this.edit = '';
   }
 }

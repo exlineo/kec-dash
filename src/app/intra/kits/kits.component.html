@@ -3,9 +3,9 @@
         <span class="material-icons">add</span>
     </a>}
 </h1>
-@if(edit && kit && !delete) {
+@if((edit=='edit' || edit=='add')  && kit) {
 <header class="lightbox">
-    <form [@apparait]="edit && kit && !delete" class="bg-sombre">
+    <form [@apparait]="(edit=='edit' || edit=='add')  && kit" class="bg-sombre" (submit)="upKit()">
         <a class="close croix" (click)="annule()"></a>
         <h2>Créer / modifier un kit</h2>
         <article class="horizon">
@@ -16,12 +16,13 @@
             </fieldset>
             <fieldset>
                 <label>Client</label>
-                <select name="client" [(ngModel)]="kit.client"></select>
+                <input name="client" [(ngModel)]="kit.client">
             </fieldset>
             <fieldset>
                 <label>Type de machine</label>
-                <select name="idMachine" [(ngModel)]="kit.machine">
-                    @for(mach of c.machines; track mach.id){
+                <select name="idMachine" [(ngModel)]="kit.idMachine">
+                    <option disabled>Machine aspergée</option>
+                    @for(mach of c.machines; track $index){
                     <option [value]="mach.id">{{ mach.marque }} ({{ mach.annee }} - {{ mach.gaz }})</option>
                     }
                 </select>
@@ -59,9 +60,9 @@
     </form>
 </header>
 }
-@if(delete && kit && !edit) {
+@if(edit=='del' && kit) {
 <header class="lightbox">
-    <article [@apparait]="delete && kit && !edit" class="bg-sombre centre">
+    <article [@apparait]="edit=='del' && kit" class="bg-sombre centre">
         <a class="close croix" (click)="annule()"></a>
         <p>Voulez-vous vraiment supprimer ce kit ?</p>
         <div class="ligne">
@@ -88,7 +89,7 @@
             </tr>
         </thead>
         <tbody>
-            @for(kit of c.kits; track kit.id){
+            @for(kit of c.kits; track $index){
             <tr>
                 <td>{{ kit.id }}</td>
                 <td>{{ kit.client }}</td>

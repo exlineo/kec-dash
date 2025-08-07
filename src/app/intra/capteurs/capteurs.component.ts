@@ -31,6 +31,7 @@ export class CapteursComponent implements OnInit {
     time_debut: 0,
     time_fin: Date.now()
   };
+
   foncts: Array<Array<number>> = []; // Tableau des temps de fonctionnement
   durees: { arret: number, fonctionnement: number } = { arret: 0, fonctionnement: 0 };
   constructor() {
@@ -49,18 +50,35 @@ export class CapteursComponent implements OnInit {
   /** Rechercher des données */
   getCapteursData() {
     if (this.c.kits.length == 0 && this.filtres.kit && this.filtres.kit != '') this.c.kit = this.c.kits.find((k: KitI) => k.id == this.filtres.kit);
-    // console.log(this.filtres);
     this.filtres.time_debut = this.tp.transform(this.filtres.debut);
     this.filtres.time_fin = this.tp.transform(this.filtres.fin);
-    console.log(this.filtres);
     this.c.getCapteurByTemps(this.filtres.time_debut, this.filtres.time_fin);
   }
   setChartConfig(data: any) {
     return {
       type: 'line',
-      data
+      data,
+      options: {
+        plugins: {
+          tooltip: {
+            callbacks: {
+              // label: (chart: any) => {
+              //   // Utiliser les valeurs des paramètres calculées dans setStats()
+              //   const valeur = chart.formattedValue;
+              //   const label = `${this.durees.arret} / ${this.durees.fonctionnement}`;
+              //   return label;
+              // },
+              title: (context: any) => {
+                let title = "Date : " + context[0].label;
+                return title;
+              }
+            },
+          }
+        }
+      }
     }
   }
+  
   /** Paramétrer un set de données pour le chart */
   setChartDataset(label: string, data: any, color: string) {
     return {
@@ -80,7 +98,7 @@ export class CapteursComponent implements OnInit {
     const tm: any = []; // Temperature machine
     const vm: any = []; // Vibration
     const cm: any = []; // Courant
-    const urge:any = []; // Urgence déclenché pour voir si l'aspersion est interdite
+    const urge: any = []; // Urgence déclenché pour voir si l'aspersion est interdite
     const h2o: any = [];
     const etiquettes: any = [];
     this.durees = { arret: 0, fonctionnement: 0 };
@@ -105,20 +123,20 @@ export class CapteursComponent implements OnInit {
     // Calcul du temps sans fonctionnement
     this.durees.fonctionnement = times[times.length - 1] - times[0] - this.sommeEcarts(times);
     this.durees.arret = this.filtres.time_fin - this.filtres.time_debut - this.durees.fonctionnement;
-    let tmp:any;
+    // let tmp: any;
     // Afficher les courbes des capteurs
     this.c.capteurs().forEach((c: any, index: number) => {
       // Données pour le chart
       ta.push(c.t_ambiante);
       ha.push(c.h_ambiante * 100);
-      c.t_machine < -30 && tmp ? tm.push(tmp.t_machine) : tm.push(c.t_machine);
+      c.t_machine < 30 ? tm.push(c.t_machine) : tm.push(0);
       // tm.push(c.t_machine);
       vm.push(c.vib);
       cm.push(c.hall);
       h2o.push(c.h2o);
       urge.push(c.u * 50);
       etiquettes.push(new Date(c.timestamp).toLocaleString());
-      tmp = c;
+      // tmp = c;
       // console.log("tmp : ", tmp.t_machine, "c : ", c.t_machine);
     });
 
@@ -157,14 +175,12 @@ export class CapteursComponent implements OnInit {
   }
   /** Récupérer les paramètres d'une aspersion */
   // &p=" + asp_encours + ":" + programmes[asp_programme].duree + ":" + programmes[asp_programme].cycles + ":" + programmes[asp_programme].interval + ":" + programmes[asp_programme].tempo + " HTTP/1.1";
-  getParams(str:string){
+  getParams(str: string) {
     const p = str.split(':');
-    return {
-      encours: p[0],
-      duree: p[1],
-      cycles: p[2],
-      interval: p[3],
-      tempo: p[4]
-    };
+    return `Durée d'aspersion : ${p[1]}, Nbr de cycles : ${p[2]}, interval entre les cycles : ${p[3]}, temporisation entre les cycles : ${p[4]}`;
+  }
+  corrigeT(t:number, v:number, seuil:number):number{
+    // Si t est inférieur au seuil, on retourne v sinon on retourne t
+    return t <= seuil ? v <= seuil ? this.corrigeT(v, 0, seuil) : t : t;
   }
 }
