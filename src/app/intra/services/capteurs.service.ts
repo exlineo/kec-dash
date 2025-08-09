@@ -79,9 +79,16 @@ export class CapteursService {
     console.log(this.capteurs());
   };
   /** Créer un nouveau kit */
+  getKit(id: string) {
+    getDoc(doc(this.fire, "kec-kits", id)).then((doc) => {
+      this.kit = doc.data() as KitI;
+    });
+  }
   addKit(kit: any) {
     console.log("Add kit", kit);
     delete(kit.machine);
+    kit.params.urgence = Number(kit.params.urgence);
+    kit.params.programme = Number(kit.params.programme);
     const ref = collection(this.fire, "kec-kits");
     addDoc(ref, {...kit}).then(() => {
       this.kits.push(kit);
@@ -89,6 +96,9 @@ export class CapteursService {
     });
   }
   async setKit(kit: KitI) {
+    if(kit.machine) delete(kit.machine);
+    kit.params.urgence = Number(kit.params.urgence);
+    kit.params.programme = Number(kit.params.programme);
     const ref = collection(this.fire, "kec-kits");
     await setDoc(doc(ref, kit.id), kit).then(() => this.u.setMsg("Mise à jour du kit", "C'est ok pour la mise à jour du kit"));
   }

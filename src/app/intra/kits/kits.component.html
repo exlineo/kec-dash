@@ -3,54 +3,80 @@
         <span class="material-icons">add</span>
     </a>}
 </h1>
-@if((edit=='edit' || edit=='add')  && kit) {
+@if((edit=='edit' || edit=='add') && kit) {
 <header class="lightbox">
     <form [@apparait]="(edit=='edit' || edit=='add')  && kit" class="bg-sombre" (submit)="upKit()">
         <a class="close croix" (click)="annule()"></a>
         <h2>Créer / modifier un kit</h2>
         <article class="horizon">
             <div class="ligne">
-            <fieldset>
-                <label>Identifiant</label>
-                <input name="id" [(ngModel)]="kit.id" required>
-            </fieldset>
-            <fieldset>
-                <label>Client</label>
-                <input name="client" [(ngModel)]="kit.client">
-            </fieldset>
-            <fieldset>
-                <label>Type de machine</label>
-                <select name="idMachine" [(ngModel)]="kit.idMachine">
-                    <option disabled>Machine aspergée</option>
-                    @for(mach of c.machines; track $index){
-                    <option [value]="mach.id">{{ mach.marque }} ({{ mach.annee }} - {{ mach.gaz }})</option>
-                    }
-                </select>
-            </fieldset>
+                <fieldset>
+                    <label>Identifiant</label>
+                    <input name="id" [(ngModel)]="kit.id" required>
+                </fieldset>
+                <fieldset>
+                    <label>Client</label>
+                    <input name="client" [(ngModel)]="kit.client">
+                </fieldset>
+                <fieldset>
+                    <label>Type de machine</label>
+                    <select name="idMachine" [(ngModel)]="kit.idMachine">
+                        <option disabled>Machine aspergée</option>
+                        @for(mach of c.machines; track $index){
+                        <option [value]="mach.id">{{ mach.marque }} ({{ mach.annee }} - {{ mach.gaz }})</option>
+                        }
+                    </select>
+                </fieldset>
             </div>
             <div class="ligne">
-            <fieldset>
-                <label>Adresse</label>
-                <input name="adresse" [(ngModel)]="kit.adresse">
-            </fieldset>
-            <fieldset>
-                <label>Code postal</label>
-                <input name="codepostal" type="number" [(ngModel)]="kit.codePostal">
-            </fieldset>
-            <fieldset>
-                <label>Ville</label>
-                <input name="ville" [(ngModel)]="kit.ville">
-            </fieldset>
+                <fieldset>
+                    <label>Etat d'urgence du kit</label>
+                    <div class="ligne">
+                        <label>Aspersion autorisée
+                        <input name="urgence" type="radio" [value]="0" [(ngModel)]="kit.params.urgence"></label>
+                        <label>Aspersion interdite
+                        <input name="urgence" type="radio" [value]="1" [(ngModel)]="kit.params.urgence"></label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <label>Sélection d'un programme d'aspersion</label>
+                    <select name="programme" [(ngModel)]="kit.params.programme">
+                        <option disabled>Sélectionner un programme</option>
+                        <option value="0">1 (1, 1, 20, 12)</option>
+                        <option value="1">2 (2, 5, 10, 10)</option>
+                        <option value="2">3 (3, 1, 18, 1)</option>
+                        <option value="3">4 (2, 1, 10, 1)</option>
+                        <option value="4">5 (3, 1, 20, 1)</option>
+                        <option value="5">6 (5, 1, 20, 1)</option>
+                        <option value="6">7 (3, 10, 21, 1)</option>
+                        <option value="7">8 (3, 1, 8, 1)</option>
+                        <option value="8">9 (5, 2, 10, 10)</option>
+                    </select>
+                </fieldset>
             </div>
             <div class="ligne">
-            <fieldset>
-                <label>Latitude</label>
-                <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
-            </fieldset>
-            <fieldset>
-                <label>Longitude</label>
-                <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
-            </fieldset>
+                <fieldset>
+                    <label>Adresse</label>
+                    <input name="adresse" [(ngModel)]="kit.adresse">
+                </fieldset>
+                <fieldset>
+                    <label>Code postal</label>
+                    <input name="codepostal" type="number" [(ngModel)]="kit.codePostal">
+                </fieldset>
+                <fieldset>
+                    <label>Ville</label>
+                    <input name="ville" [(ngModel)]="kit.ville">
+                </fieldset>
+            </div>
+            <div class="ligne">
+                <fieldset>
+                    <label>Latitude</label>
+                    <input name="lat" type="number" [(ngModel)]="kit.geo.lat">
+                </fieldset>
+                <fieldset>
+                    <label>Longitude</label>
+                    <input name="lon" type="number" [(ngModel)]="kit.geo.lon">
+                </fieldset>
             </div>
             <fieldset class="ligne">
                 <button type="reset" (click)="annule()">Annuler</button>
@@ -79,6 +105,8 @@
                 <th>id</th>
                 <th>client</th>
                 <th>Machine</th>
+                <th>urgence</th>
+                <th>programme</th>
                 <th>adresse</th>
                 <th>ville</th>
                 <th>Code postal</th>
@@ -94,6 +122,10 @@
                 <td>{{ kit.id }}</td>
                 <td>{{ kit.client }}</td>
                 <td>@if(kit.idMachine) { {{ kit.idMachine | machine:c.machines }} }</td>
+                <td>@if(kit.params.urgence && kit.params.urgence > 0){
+                    <span class="material-icons">warning</span>
+                }@else { <span class="material-icons">check</span>}</td>
+                <td>{{ kit.params.programme }}</td>
                 <td>{{ kit.adresse }}</td>
                 <td>{{ kit.ville }}</td>
                 <td>{{ kit.codePostal }}</td>

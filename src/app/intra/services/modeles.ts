@@ -10,6 +10,7 @@ export interface KitI {
     machine?:MachineI;
     idMachine?:string;
     geo:{lat:number, lon:number};
+    params:{urgence:number, programme:number};
     abonnement?: number;
 }
 export class Kit implements KitI {
@@ -24,6 +25,7 @@ export class Kit implements KitI {
     machine = new Machine();
     idMachine = 'josy';
     geo = {lat:43.296146466261995, lon:-0.37489563551620225};
+    params = {urgence:0, programme:0};
 }
 export interface MachineI{
     id:string;
