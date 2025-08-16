@@ -214,6 +214,10 @@ table th, table td {
 table th {
     border-bottom: 5px solid rgba(0,0,0,0);
 }
+small {
+    font-size: 10px;
+    font-weight: 100;
+}
 .logo {
     display: flex;
     flex-flow: row nowrap;

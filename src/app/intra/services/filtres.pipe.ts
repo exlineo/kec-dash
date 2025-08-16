@@ -65,6 +65,6 @@ export class MachinePipe implements PipeTransform {
   transform(id: string, machines?: Array<MachineI>): string {
     if(!id || !machines) return '';
     const mach = machines.find((m: MachineI) => m.id == id)!;
-    return mach ? mach.marque + ' (' + mach.annee + ' - ' + mach.gaz + ')' : '';
+    return mach ? mach.id + ' (' + mach.annee + ' - ' + mach.gaz + ')' : '';
   }
 }

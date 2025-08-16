@@ -6,6 +6,7 @@ import { KitsComponent } from "./kits/kits.component";
 import { InfosComponent } from "./infos/infos.component";
 import { CapteursComponent } from "./capteurs/capteurs.component";
 import { MachinesComponent } from "./machines/machines.component";
+import { ProgrammesComponent } from "./programmes/programmes.component";
 
 export const INTRA_ROUTES: Route[] = [
   {
@@ -15,6 +16,7 @@ export const INTRA_ROUTES: Route[] = [
       { path: 'capteurs', component: CapteursComponent, title: 'KEC - Données des kits' },
       { path: 'reglages', component: ReglagesComponent, title: 'KEC - Réglage des kits' },
       { path: 'kits', component:KitsComponent, title: 'KEC - Gestion des kits'},
+      { path: 'programmes', component:ProgrammesComponent, title: "KEC - Programmes d'aspersion"},
       { path: 'machines', component:MachinesComponent, title: 'KEC - Gestion des machines'}
     ]
   }

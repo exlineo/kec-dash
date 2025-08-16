@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { Firestore, collection, QuerySnapshot, query, doc, getDocs, getDoc, setDoc, where, deleteDoc, addDoc } from '@angular/fire/firestore';
-import { KitI, MachineI } from './modeles';
+import { ConfigI, KitI, MachineI } from './modeles';
 import { UtilsService } from '../../extra/services/utils.service';
 
 @Injectable({
@@ -11,34 +11,53 @@ export class CapteursService {
   fire: Firestore = inject(Firestore);
   u: UtilsService = inject(UtilsService);
 
-  kits: Array<KitI> = [];
+  kits: Array<KitI> = []; // Liste des kits installés
   kit?: KitI;
 
-  machines: Array<MachineI> = [];
+  machines: Array<MachineI> = []; // Liste des machines disponibles
   machine?: MachineI;
+
+  configs: Array<ConfigI> = []; // Programmes d'aspersion des kits
 
   capteurs = signal<Array<any>>([]);
 
   constructor() { this.getKits(); }
   /** Obtenir la liste des kits disponibles */
-  getKits() {
+  async getKits() {
     // Télécharger la liste des kits
     this.kits = [];
-    getDocs(collection(this.fire, "kec-kits")).then((snap: QuerySnapshot) => {
+    await getDocs(collection(this.fire, "kec-kits")).then((snap: QuerySnapshot) => {
       snap.forEach((doc) => {
         this.kits.push(doc.data() as KitI);
       });
-      console.log(this.kits);
+      console.log("Kits", this.kits);
+
+      // Télécharger la liste des programmes d'aspersions
+      this.getConfigs();
+      this.getMachines();
     });
-    // Télécharger la liste des machines
+  }
+
+  getConfigs() {
+    this.configs = [];
+    getDocs(collection(this.fire, "kec-programmes")).then((snap: QuerySnapshot) => {
+      snap.forEach((doc) => {
+        let conf = doc.data() as ConfigI;
+        conf.id = doc.id;
+        this.configs.push(conf);
+      });
+      console.log("Programmes d'aspersion", this.configs);
+    });
+  }
+  getMachines() {
     this.machines = [];
     getDocs(collection(this.fire, "kec-machines")).then((snap: QuerySnapshot) => {
       snap.forEach((doc) => {
         this.machines.push(doc.data() as MachineI);
       });
+      console.log("Machines", this.machines);
     });
   }
-
   async getCapteursByKit(idKit: string, debut: number = 0, fin: number = Date.now()) {
     // ref.where("timestamp", ">=", "2017-11").where("timestamp", "<", "2017-12")
     const q = query(collection(this.fire, "kec-capteurs"),
@@ -60,12 +79,12 @@ export class CapteursService {
     //   this.u.setMsg("Données chargées", "Recueil des données des capteurs du kit");
     // }
   }
-  async getCapteurByTemps(debut: number = 0, fin: number = Date.now(), kit?:KitI) {
+  async getCapteurByTemps(debut: number = 0, fin: number = Date.now(), kit?: KitI) {
     // ref.where("timestamp", ">=", "2017-11").where("timestamp", "<", "2017-12")
-    let q:any;
-    if(kit){
+    let q: any;
+    if (kit) {
       q = query(collection(this.fire, "kec-capteurs"), where("k", "==", kit.id), where("timestamp", ">=", debut), where("timestamp", "<", fin));
-    }else{
+    } else {
       q = query(collection(this.fire, "kec-capteurs"), where("timestamp", ">=", debut), where("timestamp", "<", fin));
     }
     console.log(debut, fin);
@@ -86,17 +105,18 @@ export class CapteursService {
   }
   addKit(kit: any) {
     console.log("Add kit", kit);
-    delete(kit.machine);
+    delete (kit.machine);
     kit.params.urgence = Number(kit.params.urgence);
     kit.params.programme = Number(kit.params.programme);
     const ref = collection(this.fire, "kec-kits");
-    addDoc(ref, {...kit}).then(() => {
+    // addDoc(ref, {...kit}).then(() => {
+    setDoc(doc(ref, kit.id), { ...kit }).then(() => {
       this.kits.push(kit);
       this.u.setMsg("Ajout d'un kit", "Cool, le kit a été ajouté");
     });
   }
   async setKit(kit: KitI) {
-    if(kit.machine) delete(kit.machine);
+    if (kit.machine) delete (kit.machine);
     kit.params.urgence = Number(kit.params.urgence);
     kit.params.programme = Number(kit.params.programme);
     const ref = collection(this.fire, "kec-kits");
@@ -105,20 +125,21 @@ export class CapteursService {
   /** Créer une nouvelle machine */
   async addMachine(machine: MachineI) {
     const ref = collection(this.fire, "kec-machines");
-    addDoc(ref, {...machine}).then(() => {
+    addDoc(ref, { ...machine }).then(() => {
       this.machines.push(machine);
       this.u.setMsg("Ajout de la machine", "C'est ok pour l'ajout de la machine");
     });
   }
   setMachine(machine: any) {
     const ref = collection(this.fire, "kec-machines");
-    setDoc(doc(ref, machine.id), {...machine}).then(() => this.u.setMsg("Mise à jour de la machine", "C'est ok pour la mise à jour de la machine"));
+    setDoc(doc(ref, machine.id), { ...machine }).then(() => this.u.setMsg("Mise à jour de la machine", "C'est ok pour la mise à jour de la machine"));
   }
   deleteKit(id: string) {
     deleteDoc(doc(this.fire, "kec-kits", id)).then(() => {
       const index = this.kits.findIndex((k: KitI) => k.id == id);
       this.kits.splice(index, 1);
-      this.u.setMsg("Suppression du kit", "C'est ok pour la suppresion du kit")});
+      this.u.setMsg("Suppression du kit", "C'est ok pour la suppresion du kit")
+    });
   }
   deleteMachine(id: string) {
     deleteDoc(doc(this.fire, "kec-machines", id)).then(() => {
@@ -126,5 +147,37 @@ export class CapteursService {
       this.machines.splice(index, 1);
       this.u.setMsg("Suppresion de la machine", "C'est ok pour la suppression de la machine");
     });
+  }
+  addConf(conf: any) {
+    const ref = collection(this.fire, "kec-programmes");
+    for (let i in conf) {
+      if (i != 'id' && i != 'commentaire') {
+        conf[i] = Number(conf[i]); // Convertir les valeurs en nombre
+      }
+    }
+    // addDoc(ref, {...kit}).then(() => {
+    addDoc(ref, { ...conf }).then((doc) => {
+      this.getConfigs();
+      this.u.setMsg("Ajout d'un programme", "Cool, le programme a été ajouté");
+    });
+  }
+  async setConf(conf: any) {
+    const ref = collection(this.fire, "kec-programmes");
+    for (let i in conf) {
+      if (i != 'id' && i != 'commentaire') {
+        conf[i] = Number(conf[i]); // Convertir les valeurs en nombre
+      }
+    }
+    await setDoc(doc(ref, conf.id), conf)
+      .then(() => this.u.setMsg("Mise à jour du porgramme", "C'est ok pour la mise à jour du programme"))
+      .catch((error) => this.u.setMsg("Erreur !", error.message));
+  }
+  deleteConf(id: string) {
+    deleteDoc(doc(this.fire, "kec-programmes", id)).then(() => {
+      const index = this.configs.findIndex((c: ConfigI) => c.id == id);
+      this.configs.splice(index, 1);
+      this.u.setMsg("Suppression du programme", "C'est ok pour la suppression du programme");
+    })
+      .catch((error) => this.u.setMsg("Erreur !", error.message));;
   }
 }

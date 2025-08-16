@@ -1,0 +1,94 @@
+<h1>Gérer les programmes d'aspersion @if(!edit && !config){
+    <a (click)="addConf()" class="position-droite">
+        <span class="material-icons">add</span>
+    </a>}
+</h1>
+@if((edit=='edit' || edit=='add') && config) {
+<header class="lightbox">
+    <form [@apparait]="(edit=='edit' || edit=='add')  && config" class="bg-sombre" (submit)="upConf()">
+        <a class="close croix" (click)="annule()"></a>
+        <h2>Créer / modifier un programme d'aspersion</h2>
+        <article class="horizon">
+            <div class="ligne">
+                <fieldset>
+                    <label>Durée *</label>
+                    <input name="duree" type="number" [(ngModel)]="config.duree" required>
+                    <legend>Durée d'aspersion en seconde pour chaque aspersion</legend>
+                </fieldset>
+
+                <fieldset>
+                    <label>Cycles *</label>
+                    <input name="cycles" type="number" [(ngModel)]="config.cycles" required>
+                    <legend>Nombre d'aspersions faites dans un cycle</legend>
+                </fieldset>
+                <fieldset>
+                    <label>Intervalle *</label>
+                    <input name="interval" type="number" [(ngModel)]="config.interval" required>
+                    <legend>Interval (en secondes) entre deux aspersions dans un même cycle</legend>
+                </fieldset>
+                <fieldset>
+                    <label>Temporisation *</label>
+                    <input name="tempo" type="number" [(ngModel)]="config.tempo" required>
+                    <legend>Durée de temporisation entre deux cycles (en secondes)</legend>
+                </fieldset>
+            </div>
+            <div class="ligne">
+                <fieldset>
+                    <label>Commentaire</label>
+                    <textarea name="commentaire" [(ngModel)]="config.commentaire"></textarea>
+                    <legend>Commentaire sur la configuration</legend>
+                </fieldset>
+            </div>
+            <fieldset class="ligne">
+                <button type="reset" (click)="annule()">Annuler</button>
+                <button type="submit">Valider</button>
+            </fieldset>
+        </article>
+    </form>
+</header>
+}
+@if(edit=='del' && config && config.id) {
+<header class="lightbox">
+    <article [@apparait]="edit=='del' && config" class="bg-sombre centre">
+        <a class="close croix" (click)="annule()"></a>
+        <p>Voulez-vous vraiment supprimer ce programme ?</p>
+        <div class="ligne">
+            <button (click)="annule()">Annuler</button>
+            <button (click)="c.deleteKit(config.id)">Supprimer</button>
+        </div>
+    </article>
+</header>
+}
+<section>
+    <table>
+        <thead>
+            <tr>
+                <!-- <th>id</th> -->
+                <th>Durée</th>
+                <th>Cycles</th>
+                <th>Intervals</th>
+                <th>Temporisations</th>
+                <th>Commentaire</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(conf of c.configs; track $index){
+            <tr>
+                <!-- <td>@if(conf && conf.id){ {{ conf.id }} }</td> -->
+                <td>{{ conf.duree }}</td>
+                <td>{{ conf.cycles }}</td>
+                <td>{{ conf.interval }}</td>
+                <td>{{ conf.tempo }}</td>
+                <td>{{ conf.commentaire }}</td>
+                <td>
+                    <div class="ligne">
+                        <button (click)="editConf(conf)"><span class="material-icons">edit</span></button>
+                        <button (click)="delConf(conf)"><span class="material-icons">delete_forever</span></button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

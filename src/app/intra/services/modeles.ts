@@ -1,16 +1,16 @@
 export interface KitI {
-    id:string;
-    idClient:string | number;
-    client:string;
-    adresse?:string;
-    codePostal:number;
-    ville:string;
-    pays:string;
+    id: string;
+    idClient: string | number;
+    client: string;
+    adresse?: string;
+    codePostal: number;
+    ville: string;
+    pays: string;
     creation: Date | number;
-    machine?:MachineI;
-    idMachine?:string;
-    geo:{lat:number, lon:number};
-    params:{urgence:number, programme:number};
+    machine?: MachineI;
+    idMachine?: string;
+    geo: { lat: number, lon: number };
+    params: { urgence: number, programme: number, config?: string };
     abonnement?: number;
 }
 export class Kit implements KitI {
@@ -24,22 +24,22 @@ export class Kit implements KitI {
     creation = Date.now();
     machine = new Machine();
     idMachine = 'josy';
-    geo = {lat:43.296146466261995, lon:-0.37489563551620225};
-    params = {urgence:0, programme:0};
+    geo = { lat: 43.296146466261995, lon: -0.37489563551620225 };
+    params = { urgence: 0, programme: 0, config:''};
 }
-export interface MachineI{
-    id:string;
-    marque?:string;
-    amperes:number;
+export interface MachineI {
+    id: string;
+    marque?: string;
+    amperes: number;
     volts: number;
-    watts:number; // Ampères * Volts
-    gaz:string; // Gaz frigorifique utilisé
+    watts: number; // Ampères * Volts
+    gaz: string; // Gaz frigorifique utilisé
     limite?: number; // Limite de fonctionnement garantie par le constructeur
     annee?: number; // Année de construction
-    chaud?:number; // Puissance à chaud
-    froid?:number; // Puissance à froid
+    chaud?: number; // Puissance à chaud
+    froid?: number; // Puissance à froid
 }
-export class Machine implements MachineI{
+export class Machine implements MachineI {
     id = '';
     marque = '';
     annee = 0;
@@ -52,20 +52,29 @@ export class Machine implements MachineI{
     froid = 0;
 }
 export interface CaptI {
-    id:string;
-    m:string;
+    id: string;
+    m: string;
     timestamp: number;
-    duree:number;
-    t_machine:number;
-    t_ambiante:number;
-    h_ambiante:number;
-    vibrations:number;
-    hall:number;
-    h2o:number;
+    duree: number;
+    t_machine: number;
+    t_ambiante: number;
+    h_ambiante: number;
+    vibrations: number;
+    hall: number;
+    h2o: number;
 }
 
 enum GazE {
     R32 = 'R32',
     R40 = 'R40',
     R410A = 'R410A',
+}
+
+export interface ConfigI {
+    id?: string;
+    duree: number;  // Durée aspersion en cours * le rythme
+    cycles: number;      // Nombre de cycles de l'aspersion en cours
+    interval: number;    // interval entre plusieurs cycles
+    tempo: number;  // Valeur du seuil de temporisation entre chaque cycle pour mesurer le temps qui passe lors de l'aspersion 0 à 65000)
+    commentaire?: string; // Commentaire sur la configuration
 }
