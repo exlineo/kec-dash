@@ -1,19 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CapteursService } from '../services/capteurs.service';
-import { MachinePipe, ToDatePipe } from '../services/filtres.pipe';
-import { FormsModule, NgModel } from '@angular/forms';
+import { MachinePipe } from '../services/filtres.pipe';
+import { FormsModule } from '@angular/forms';
 import { Kit, KitI } from '../services/modeles';
 import { apparaitAnimation } from '../../extra/services/animations';
+import { UtilsService } from '../../extra/services/utils.service';
 
 @Component({
   selector: 'app-kits',
-  imports: [ToDatePipe, FormsModule, MachinePipe],
+  imports: [FormsModule, MachinePipe],
   templateUrl: './kits.component.html',
   animations: [apparaitAnimation]
 })
 export class KitsComponent implements OnInit {
 
   c: CapteursService = inject(CapteursService);
+  u:UtilsService = inject(UtilsService);
 
   edit: string = '';
   kit?: KitI;

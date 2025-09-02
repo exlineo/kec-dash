@@ -17,6 +17,7 @@ export class UtilsService {
   tpsArret(d: number, f: number) {
     return f - d * 60000; // Temps en minutes 
   };
+  /** Afficher un message */
   setMsg(titre?: string, infos?: string, classe?: string) {
     if(classe) this.classe = classe;
     if (titre && infos) {
@@ -27,5 +28,8 @@ export class UtilsService {
       this.msg = undefined;
     };
   }
-
+  /** On est sur un mobile ou un petit écran ? */
+  isMobile() {
+    return window.innerWidth < 890;
+  }
 }

@@ -1,6 +1,6 @@
 <h1>Données des kits</h1>
 <header class="bg-sombre">
-    <form class="ligne" (submit)="getCapteursData()">
+    <form class="ligne rowauto" (submit)="getCapteursData()">
         <fieldset>
             <label>Sélectionner un kit</label>
             <select name="kit" [(ngModel)]="filtres.kit" (change)="setKit(filtres.kit)">

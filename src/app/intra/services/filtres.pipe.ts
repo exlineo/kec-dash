@@ -63,6 +63,7 @@ export class ConsoPipe implements PipeTransform {
 export class MachinePipe implements PipeTransform {
   /** Durée en heures et la machine concernée */
   transform(id: string, machines?: Array<MachineI>): string {
+    console.log('id', id, machines);
     if(!id || !machines) return '';
     const mach = machines.find((m: MachineI) => m.id == id)!;
     return mach ? mach.id + ' (' + mach.annee + ' - ' + mach.gaz + ')' : '';

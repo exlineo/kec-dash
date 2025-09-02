@@ -1,16 +1,47 @@
 @media screen and (min-width:1201px) {}
 
 @media screen and (max-width:1200px) {
-    app-root main {
-    }
+    app-root main {}
 
+    .lightbox>*:nth-child(1) {
+        max-width: 100%;
+    }
+    form div.ligne {
+    flex-flow: row wrap;
+}
 }
 
 @media screen and (max-width:1160px) {}
 
-@media screen and (max-width:960px) {}
+@media screen and (max-width:890px) {
+    .cartel {
+        flex-flow: column nowrap;
+    }
+}
 
-@media screen and (max-width:700px) {}
+@media screen and (max-width:700px) {
+    app-accueil {
+        flex-flow: column nowrap !important;
+    }
+    app-accueil > aside {
+        width:90vw !important;
+        align-self:flex-end;
+        margin-top:30px;
+    }
+    app-accueil > aside > nav > ul{
+        flex-flow: row nowrap !important;
+    }
+    app-accueil > section {
+        width:100vw !important;
+        padding:0 !important;
+    }
+    app-accueil > section section {
+        padding:0 !important;
+    }
+    .logo {
+        margin:0;
+    }
+}
 
 @media screen and (max-width:560px) {}
 

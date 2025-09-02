@@ -33,9 +33,9 @@
                     <label>Etat d'urgence du kit</label>
                     <div class="ligne">
                         <label>Aspersion autorisée
-                        <input name="urgence" type="radio" [value]="0" [(ngModel)]="kit.params.urgence"></label>
+                            <input name="urgence" type="radio" [value]="0" [(ngModel)]="kit.params.urgence"></label>
                         <label>Aspersion interdite
-                        <input name="urgence" type="radio" [value]="1" [(ngModel)]="kit.params.urgence"></label>
+                            <input name="urgence" type="radio" [value]="1" [(ngModel)]="kit.params.urgence"></label>
                     </div>
                 </fieldset>
                 <fieldset>
@@ -43,7 +43,8 @@
                     <select name="programme" (change)="setProgramme(programme)" #programme>
                         <option disabled>Programmes</option>
                         @for(conf of c.configs; track $index){
-                            <option [value]=`${conf.duree}:${conf.cycles}:${conf.interval}:${conf.tempo}`>{{ conf.duree }} : {{ conf.cycles }} : {{ conf.interval }} : {{ conf.tempo }}</option>
+                        <option [value]=`${conf.duree}:${conf.cycles}:${conf.interval}:${conf.tempo}`>{{ conf.duree }} :
+                            {{ conf.cycles }} : {{ conf.interval }} : {{ conf.tempo }}</option>
                         }
                         <!-- <option value="0">1 (1, 1, 20, 12)</option>
                         <option value="1">2 (2, 5, 10, 10)</option>
@@ -111,12 +112,14 @@
                 <th>Machine</th>
                 <th>urgence</th>
                 <th>programme<br><small>(duree : cycles : intervalle : tempo)</small></th>
+                <!-- @if(!u.isMobile()){
                 <th>adresse</th>
                 <th>ville</th>
                 <th>Code postal</th>
                 <th>Date de mise en service</th>
                 <th>Abonnement</th>
-                <th>Géolocalisation</th>
+                } 
+                <th>Géolocalisation</th>-->
                 <th></th>
             </tr>
         </thead>
@@ -128,21 +131,26 @@
                 <td>@if(kit.idMachine) { {{ kit.idMachine | machine:c.machines }} }</td>
                 <td>@if(kit.params.urgence && kit.params.urgence > 0){
                     <span class="material-icons">warning</span>
-                }@else { <span class="material-icons">check</span>}</td>
+                    }@else { <span class="material-icons">check</span>}
+                </td>
                 <td>{{ kit.params.config }}</td>
+
+                <!-- @if(!u.isMobile()){
                 <td>{{ kit.adresse }}</td>
                 <td>{{ kit.ville }}</td>
                 <td>{{ kit.codePostal }}</td>
                 <td>{{ kit.creation | toDate }}</td>
                 <td>@if(kit.abonnement && kit.abonnement > 0){ <span class="material-icons">card_membership</span> }
                 </td>
+                } 
+                
                 <td>@if(kit.geo && kit.geo.lat && kit.geo.lon){<a
                         href="http://www.openstreetmap.org/#map=16/{{ kit.geo.lat }}/{{ kit.geo.lon }}"
-                        target="_blank"><span class="material-icons">map</span></a>}</td>
+                        target="_blank"><span class="material-icons">map</span></a>}</td>-->
                 <td>
                     <div class="ligne">
-                        <button (click)="editKit(kit)"><span class="material-icons">edit</span></button>
-                        <button (click)="delKit(kit)"><span class="material-icons">delete_forever</span></button>
+                        <button (click)="editKit(kit)" class="picto"><span class="material-icons">edit</span></button>
+                        <button (click)="delKit(kit)" class="picto"><span class="material-icons">delete_forever</span></button>
                     </div>
                 </td>
             </tr>

@@ -123,13 +123,19 @@ export class CapteursComponent implements OnInit {
     // Calcul du temps sans fonctionnement
     this.durees.fonctionnement = times[times.length - 1] - times[0] - this.sommeEcarts(times);
     this.durees.arret = this.filtres.time_fin - this.filtres.time_debut - this.durees.fonctionnement;
-    // let tmp: any;
+    let tmp: number = 0;
     // Afficher les courbes des capteurs
     this.c.capteurs().forEach((c: any, index: number) => {
       // Données pour le chart
       ta.push(c.t_ambiante);
       ha.push(c.h_ambiante * 100);
-      c.t_machine < 30 ? tm.push(c.t_machine) : tm.push(0);
+      // Régulation des parasites moteur
+      if(c.t_machine < -30) {
+        tm.push(tmp);
+      }else{
+        tmp = c.t_machine;
+        tm.push(c.t_machine);
+      }
       // tm.push(c.t_machine);
       vm.push(c.vib);
       cm.push(c.hall);
