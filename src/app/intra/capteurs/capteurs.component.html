@@ -3,7 +3,7 @@
     <form class="ligne rowauto" (submit)="getCapteursData()">
         <fieldset>
             <label>Sélectionner un kit</label>
-            <select name="kit" [(ngModel)]="filtres.kit" (change)="setKit(filtres.kit)">
+            <select name="kit" [(ngModel)]="filtres.kit">
                 <option value="">Tous</option>
                 @for(kit of c.kits; track kit.id){
                     <option [value]="kit.id">{{ kit.id }} - {{ kit.client }}</option>

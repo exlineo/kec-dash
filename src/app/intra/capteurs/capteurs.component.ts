@@ -40,16 +40,22 @@ export class CapteursComponent implements OnInit {
     })
   }
   ngOnInit() {
+    // if(this.c.kits.length > 0) {
+    //   this.c.getKits();
+    // }
   }
   /** Kit choisi */
   setKit(kit: string) {
     this.c.kit = this.c.kits.find((k: KitI) => k.id == kit);
     this.c.kit!.machine = this.c.machines.find((m: MachineI) => m.id == this.c.kit!.idMachine);
+    console.log("Kit choisi", this.c.kit, this.c.kit!.machine);
   }
 
   /** Rechercher des données */
   getCapteursData() {
-    if (this.c.kits.length == 0 && this.filtres.kit && this.filtres.kit != '') this.c.kit = this.c.kits.find((k: KitI) => k.id == this.filtres.kit);
+    if(this.filtres.kit && this.filtres.kit != "") {
+      this.setKit(this.filtres.kit);
+    };
     this.filtres.time_debut = this.tp.transform(this.filtres.debut);
     this.filtres.time_fin = this.tp.transform(this.filtres.fin);
     this.c.getCapteurByTemps(this.filtres.time_debut, this.filtres.time_fin);
@@ -96,9 +102,10 @@ export class CapteursComponent implements OnInit {
     const ta: any = []; // Temperature ambiante
     const ha: any = []; // Humidité ambiante
     const tm: any = []; // Temperature machine
-    const vm: any = []; // Vibration
-    const cm: any = []; // Courant
+    const vm: any = []; // Vibrations
+    const cm: any = []; // Courants enregistrés
     const urge: any = []; // Urgence déclenché pour voir si l'aspersion est interdite
+    const am:any = []; // Arrêts machine commandés à distance
     const h2o: any = [];
     const etiquettes: any = [];
     this.durees = { arret: 0, fonctionnement: 0 };
@@ -137,10 +144,12 @@ export class CapteursComponent implements OnInit {
         tm.push(c.t_machine);
       }
       // tm.push(c.t_machine);
-      vm.push(c.vib);
-      cm.push(c.hall);
-      h2o.push(c.h2o);
+      // vm.push(c.vib);
+      // cm.push(c.hall);
+      c.hall < 150 ? cm.push(0) : cm.push(100);
+      // h2o.push(c.h2o);
       urge.push(c.u * 50);
+      c.a ? am.push(100) : am.push(0); // Indiquer si la machine est en fonctionnement ou pas avec un seuil de courant minimum à 150
       etiquettes.push(new Date(c.timestamp).toLocaleString());
       // tmp = c;
       // console.log("tmp : ", tmp.t_machine, "c : ", c.t_machine);
@@ -150,11 +159,12 @@ export class CapteursComponent implements OnInit {
       labels: etiquettes,
       datasets: [
         this.setChartDataset('Temperature ambiante', ta, '#ff0000'),
-        this.setChartDataset('Humidité ambiante', ha, '#00ff00'),
-        this.setChartDataset('Temperature machine', tm, '#0000ff'),
-        this.setChartDataset("Interdiction d'aspersion", urge, '#cececeff')
+        this.setChartDataset('Temperature machine', tm, '#ffbb00'),
+        this.setChartDataset('Humidité ambiante', ha, '#4242e7ff'),
+        this.setChartDataset('Courant', cm, '#4eff4eff'),
+        this.setChartDataset("Interdiction d'aspersion", urge, '#cececeff'),
+        this.setChartDataset("Arrêt machine", am, '#000000ff')
         // this.setChartDataset('Vibration', vm, '#ff00ff'),
-        // this.setChartDataset('Courant', cm, '#ffff00'),
         // this.setChartDataset('H2O', h2o, '#00ffff'),
       ]
     };

@@ -79,23 +79,29 @@ export class CapteursService {
     //   this.u.setMsg("Données chargées", "Recueil des données des capteurs du kit");
     // }
   }
-  async getCapteurByTemps(debut: number = 0, fin: number = Date.now(), kit?: KitI) {
+  async getCapteurByTemps(debut: number = 0, fin: number = Date.now()) {
     // ref.where("timestamp", ">=", "2017-11").where("timestamp", "<", "2017-12")
     let q: any;
-    if (kit) {
-      q = query(collection(this.fire, "kec-capteurs"), where("k", "==", kit.id), where("timestamp", ">=", debut), where("timestamp", "<", fin));
+    if (this.kit && this.kit.id) {
+      console.log("Recherche des mesures du kit : ", this.kit);
+      q = query(collection(this.fire, "kec-capteurs"), where("k", "==", this.kit.id), where("timestamp", ">=", debut), where("timestamp", "<", fin));
     } else {
+      console.log("Recherche des dernières données des capteurs");
       q = query(collection(this.fire, "kec-capteurs"), where("timestamp", ">=", debut), where("timestamp", "<", fin));
     }
-    console.log(debut, fin);
-    const snap = await getDocs(q);
-
+    
     const d: any = [];
+    const snap = await getDocs(q);
     snap.forEach((doc) => {
       d.push(doc.data());
     });
     this.capteurs.set(d); // Signaler le chargement des données des capteurs
     console.log(this.capteurs());
+    if(d.length == 0){
+      this.u.setMsg("Aucune donnée", "Aucune donnée n'a été trouvée sur cette plage de temps avec ce kit.");
+    }else{
+      this.u.setMsg("Données récupérées", "Recueil des données des capteurs du kit");
+    }
   };
   /** Créer un nouveau kit */
   getKit(id: string) {
