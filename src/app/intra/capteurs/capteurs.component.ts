@@ -143,16 +143,12 @@ export class CapteursComponent implements OnInit {
         tmp = c.t_machine;
         tm.push(c.t_machine);
       }
-      // tm.push(c.t_machine);
       // vm.push(c.vib);
-      // cm.push(c.hall);
       c.hall < 150 ? cm.push(0) : cm.push(100);
       // h2o.push(c.h2o);
       urge.push(c.u * 50);
       c.a ? am.push(100) : am.push(0); // Indiquer si la machine est en fonctionnement ou pas avec un seuil de courant minimum à 150
       etiquettes.push(new Date(c.timestamp).toLocaleString());
-      // tmp = c;
-      // console.log("tmp : ", tmp.t_machine, "c : ", c.t_machine);
     });
 
     this.lineData = {
@@ -169,7 +165,6 @@ export class CapteursComponent implements OnInit {
       ]
     };
 
-    console.log(this.foncts, this.durees, this.dp.transform(this.durees.fonctionnement));
     // console.log(ta, ha, tm, vm, cm, h2o, this.lineData);
     if (this.lineChart) {
       this.lineChart.destroy();

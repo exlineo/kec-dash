@@ -30,7 +30,6 @@ export class CapteursService {
       snap.forEach((doc) => {
         this.kits.push(doc.data() as KitI);
       });
-      console.log("Kits", this.kits);
 
       // Télécharger la liste des programmes d'aspersions
       this.getConfigs();
@@ -46,7 +45,6 @@ export class CapteursService {
         conf.id = doc.id;
         this.configs.push(conf);
       });
-      console.log("Programmes d'aspersion", this.configs);
     });
   }
   getMachines() {
@@ -55,7 +53,6 @@ export class CapteursService {
       snap.forEach((doc) => {
         this.machines.push(doc.data() as MachineI);
       });
-      console.log("Machines", this.machines);
     });
   }
   async getCapteursByKit(idKit: string, debut: number = 0, fin: number = Date.now()) {
@@ -64,7 +61,6 @@ export class CapteursService {
       where("k", "==", idKit),
       where("timestamp", ">=", debut),
       where("timestamp", "<", fin));
-    console.log(debut, fin);
     const snap = await getDocs(q);
 
     const d: any = [];
@@ -83,10 +79,8 @@ export class CapteursService {
     // ref.where("timestamp", ">=", "2017-11").where("timestamp", "<", "2017-12")
     let q: any;
     if (this.kit && this.kit.id) {
-      console.log("Recherche des mesures du kit : ", this.kit);
       q = query(collection(this.fire, "kec-capteurs"), where("k", "==", this.kit.id), where("timestamp", ">=", debut), where("timestamp", "<", fin));
     } else {
-      console.log("Recherche des dernières données des capteurs");
       q = query(collection(this.fire, "kec-capteurs"), where("timestamp", ">=", debut), where("timestamp", "<", fin));
     }
     
@@ -110,7 +104,6 @@ export class CapteursService {
     });
   }
   addKit(kit: any) {
-    console.log("Add kit", kit);
     delete (kit.machine);
     kit.params.urgence = Number(kit.params.urgence);
     kit.params.programme = Number(kit.params.programme);

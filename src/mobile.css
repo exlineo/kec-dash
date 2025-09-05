@@ -6,9 +6,14 @@
     .lightbox>*:nth-child(1) {
         max-width: 100%;
     }
+
     form div.ligne {
-    flex-flow: row wrap;
-}
+        flex-flow: row wrap;
+    }
+
+    aside li {
+        margin: 3px !important;
+    }
 }
 
 @media screen and (max-width:1160px) {}
@@ -23,23 +28,30 @@
     app-accueil {
         flex-flow: column nowrap !important;
     }
-    app-accueil > aside {
-        width:90vw !important;
-        align-self:flex-end;
-        margin-top:30px;
+
+    app-accueil>aside {
+        width: 100vw !important;
+        align-self: center;
+        margin-top: 30px;
+        font-size: 80%;
     }
-    app-accueil > aside > nav > ul{
+    app-accueil>aside>nav>ul {
+        width: 100vw !important;
+        justify-content: space-around;
         flex-flow: row nowrap !important;
     }
-    app-accueil > section {
-        width:100vw !important;
-        padding:0 !important;
+
+    app-accueil>section {
+        width: 100vw !important;
+        padding: 0 !important;
     }
-    app-accueil > section section {
-        padding:0 !important;
+
+    app-accueil>section section {
+        padding: 0 !important;
     }
+
     .logo {
-        margin:0;
+        margin: 0;
     }
 }
 

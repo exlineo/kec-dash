@@ -8,6 +8,8 @@ export class UtilsService {
   msg?: { titre: string, infos: string };
   classe: string = 'invalide';
 
+  isMobile:boolean = false;
+
   sendMail(email: string) {
     window.open("mailto:" + atob(email) + "?subject=Contact depuis le site Internet&body=Bonjour, je suis interesse par votre offre.");
   }
@@ -28,8 +30,5 @@ export class UtilsService {
       this.msg = undefined;
     };
   }
-  /** On est sur un mobile ou un petit écran ? */
-  isMobile() {
-    return window.innerWidth < 890;
-  }
+
 }
